@@ -1,4 +1,4 @@
-package com.example.yasmin.educationalaugmentedrealitygame;
+package com.example.yasmin.educationalaugmentedreality;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
