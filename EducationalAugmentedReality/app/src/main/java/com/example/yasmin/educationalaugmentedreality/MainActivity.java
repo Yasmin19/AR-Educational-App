@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
 
         //Create instance of Camera
         mCamera = getCameraInstance();
@@ -75,8 +73,8 @@ public class MainActivity extends AppCompatActivity {
         final SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
         mSensingKitLib.registerSensorModule(SKSensorModuleType.BATTERY);
 
-        start = (Button) findViewById(R.id.start);
-        batteryText = (EditText) findViewById(R.id.batteryText);
+       /* start = (Button) findViewById(R.id.start);
+        //batteryText = (EditText) findViewById(R.id.batteryText);
         start.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View arg0) {
                 Button start = (Button) arg0;
@@ -88,15 +86,13 @@ public class MainActivity extends AppCompatActivity {
                        @Override
                        public void onDataReceived(final SKSensorModuleType moduleType, final SKSensorData sensorData) {
                            System.out.println(sensorData.getDataInCSV());  // Print data in CSV format
-                           batteryText.setText(sensorData.getDataInCSV());
+                          // batteryText.setText(sensorData.getDataInCSV());
                        }
                    });
                }
                catch(SKException e){}
-
-                //batteryText.setText("Hi, this part works");
             }
-        });
+        });*/
 
     }
 

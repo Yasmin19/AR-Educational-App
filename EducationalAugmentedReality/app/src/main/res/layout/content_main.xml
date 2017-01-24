@@ -18,30 +18,42 @@
         android:layout_height="fill_parent"
         android:weightSum="1"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:id="@+id/linearLayout">
 
         <FrameLayout
             android:id="@+id/camera_preview"
-            android:layout_width="232dp"
-            android:layout_height="416dp">
+            android:layout_width="1500dp"
+            android:layout_height="800dp">
 
         </FrameLayout>
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/batteryText"
-            android:layout_below="@+id/start"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            android:id="@+id/start"
-            android:layout_below="@+id/textView"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="27dp"
-            android:layout_gravity="bottom" />
     </LinearLayout>
+
+    <GridLayout
+        android:layout_width="561dp"
+        android:layout_height="330dp"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_alignParentEnd="true">
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_row="4"
+            android:layout_column="6">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"></GridLayout>
+            </FrameLayout>
+        </FrameLayout>
+    </GridLayout>
 </RelativeLayout>
