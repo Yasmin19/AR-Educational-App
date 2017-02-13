@@ -1,0 +1,106 @@
+run:
+[DINOSAUR, BICYCLE, RABBIT, CHAIR, BALL, KEY]
+right: 6 4
+left: 8 4
+I'M HERE, pos:0
+ACROSS: true
+DOWN: true
+right: 4 4
+left: 6 4
+I'M HERE, pos:1
+DOWN: true
+true
+true 4
+I'M ALL THE WAY HERE
+I'M ALL THE WAY HERE
+right: 0 4
+left: 2 4
+I'M HERE, pos:4
+DOWN: true
+true
+true 1
+I'M ALL THE WAY HERE
+I'M ALL THE WAY HERE
+I'M ALL THE WAY HERE
+I'M ALL THE WAY HERE
+I'M ALL THE WAY HERE
+I'M ALL THE WAY HERE
+right: 0 5
+left: 2 5
+I'M HERE, pos:5
+ACROSS: true
+right: 0 0
+left: 2 0
+I'M HERE, pos:0
+ACROSS: true
+right: 6 4
+left: 8 4
+I'M HERE, pos:0
+ACROSS: true
+DOWN: true
+right: 0 1
+left: 2 1
+I'M HERE, pos:1
+ACROSS: true
+right: 4 4
+left: 6 4
+I'M HERE, pos:1
+DOWN: true
+true
+true 2
+I'M ALL THE WAY HERE
+I'M ALL THE WAY HERE
+right: 0 2
+left: 2 2
+I'M HERE, pos:2
+ACROSS: true
+right: 0 3
+left: 2 3
+I'M HERE, pos:2
+ACROSS: true
+right: 0 2
+left: 2 2
+I'M HERE, pos:3
+ACROSS: true
+right: 0 3
+left: 2 3
+I'M HERE, pos:3
+ACROSS: true
+right: 0 4
+left: 2 4
+I'M HERE, pos:4
+right: 0 5
+left: 2 5
+I'M HERE, pos:5
+ACROSS: true
+- R - - - - - - - - 
+- A - - - - - - - - 
+- B - - - - - - - - 
+- B - - - - - - - - 
+D I N O S A U R - - 
+- T - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+- - - - - - - - - - 
+true   false   true   true   true   true   true   true   true   true   
+
+true   false   true   true   true   true   true   true   true   true   
+
+true   false   true   true   true   true   true   true   true   true   
+
+true   false   true   true   true   true   true   true   true   true   
+
+false   false   false   false   false   false   false   false   true   true   
+
+true   false   true   true   true   true   true   true   true   true   
+
+true   true   true   true   true   true   true   true   true   true   
+
+true   true   true   true   true   true   true   true   true   true   
+
+true   true   true   true   true   true   true   true   true   true   
+
+true   true   true   true   true   true   true   true   true   true   
+
+BUILD SUCCESSFUL (total time: 0 seconds)
