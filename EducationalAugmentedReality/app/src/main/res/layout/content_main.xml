@@ -23,45 +23,18 @@
 
         <FrameLayout
             android:id="@+id/camera_preview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        </FrameLayout>
+
+        <com.example.yasmin.educationalaugmentedreality.DrawSurfaceView
+            android:id="@+id/drawSurfaceView"
             android:layout_width="1500dp"
             android:layout_height="800dp">
 
-            android:id="@+id/drawSurfaceView"
-            android:layout_width="1500dp"
-            android:layout_height="800dp"
-
-            <FrameLayout
-                android:layout_width="357dp"
-                android:layout_height="549dp"
-                android:layout_gravity="left|top"></FrameLayout>
-        </FrameLayout>
+        </com.example.yasmin.educationalaugmentedreality.DrawSurfaceView>
 
     </FrameLayout>
 
-    <GridLayout
-        android:layout_width="561dp"
-        android:layout_height="330dp"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_alignBottom="@+id/linearLayout"
-        android:layout_alignParentEnd="true">
-
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_row="4"
-            android:layout_column="6">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center">
-
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"></GridLayout>
-            </FrameLayout>
-        </FrameLayout>
-    </GridLayout>
 </RelativeLayout>

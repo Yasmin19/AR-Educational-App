@@ -52,17 +52,10 @@ public class MainActivity extends AppCompatActivity {
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
 
-        //mDrawView = (DrawSurfaceView) findViewById(R.id.drawSurfaceView);
+        mDrawView = (DrawSurfaceView) findViewById(R.id.drawSurfaceView);
 
         populateGeofences();
-        /*
-        try {
-            testSensor();
-        } catch (SKException e) {
-            e.printStackTrace();
-        }
-        */
-        Log.d("ROTATION", "Before starting intent");
+
         startService(new Intent(getApplicationContext(), OrientationSensor.class));
 
     }
