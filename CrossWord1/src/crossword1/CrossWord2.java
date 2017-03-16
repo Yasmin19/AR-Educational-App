@@ -104,12 +104,12 @@ public class CrossWord2 {
             }
         }
 
-         word = "ORANGE";
+        word = "ORANGE";
        
         //look for any intersections
         for (int pos=0; pos<word.length(); pos++){ //Loop through each letter
-            for (int row=0; row<board.length; row++){
-                for (int col=0; col<board.length; col++){
+            for (int row=board.length-1; row>=0; row--){
+                for (int col=board.length-1; col>=0; col--){
                     if (board[row][col] == word.charAt(pos)){
                         if (check(word, row, col, pos))
                             break;//If return true, break out of loop
@@ -146,6 +146,8 @@ public class CrossWord2 {
                 }
             }
         }
+        
+         
     }
     
     public static boolean check(String word, int row, int col, int pos){
@@ -234,19 +236,18 @@ public class CrossWord2 {
     }
     
     public static boolean placeWord(String word, int row, int col, int pos, boolean across, boolean down, int lettercount){
+       
         
-         if (across){    
+        //SOMETHING WRONG IN ACROSS-CHECK HERE
+        if (across){    
             if ((col >= pos) //BEFORE
                     && (board.length - col >= word.length() - pos)){ //AFTER
                 //3rd check
-                
-                System.out.println("COL: " + col + "POS " + pos);
-                System.out.println(word + " has passed the board test");
                 int start = col - pos;
-                System.out.println("START POS: " + start);
-                for (int c=start; c<start+word.length(); c++){ 
-                    if (c!=pos){
-                        if (!bAvailability[row][c]){
+                for (int c=start; c<start+word.length(); c++){
+                    System.out.println(word + " has passed the board test"); 
+                    if (!bAvailability[row][c]){
+                        if (c!=pos){
                             System.out.println("I've failed :("); 
                             return false;
                         }
@@ -260,8 +261,8 @@ public class CrossWord2 {
                 }
             }
             return true;
-            
         }
+        /*******************************************/
         if (down){
             if ((row >= pos)//BEFORE
                     && (board.length - row >= word.length() - pos)){ //AFTER
@@ -269,12 +270,13 @@ public class CrossWord2 {
                 int start = row-pos;
                 for (int r= start; r<start+word.length(); r++){
                     System.out.println(word + " has passed the board test");
-                    if (r!=pos){ //Make sure not to include intersection field  
-                         if (!(bAvailability[r][col])){ //Check if occupied                  
-                            System.out.println("I've failed :("); 
-                            return false;
+                        if (!(bAvailability[r][col])){ //Check if occupied 
+                            if (r!=pos){ //Make sure not to include intersection field  {               
+                                System.out.println("I've failed :("); 
+                                return false;
+                            }
                         }
-                    }
+                    
                 }
                 for (int r= start; r<start+word.length(); r++){
                     board[r][col] = word.charAt(lettercount);
@@ -288,20 +290,42 @@ public class CrossWord2 {
 
     public static void displayBoard() {
 
-        for (int x = 0; x < board.length; x++) {
-            for (int y = 0; y < board.length; y++) {
-                System.out.print(board[x][y] + " ");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board.length; col++) {
+                System.out.print("[" + row + "][" + col + "]  ");
             }
+            System.out.println("");
+        }
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        
+        for (int row = 0; row < board.length; row++) {
+            for (int col = 0; col < board.length; col++) {
+                System.out.print(board[row][col] + " ");
+            }
+            System.out.println("");
+        }
+   
+        for (int row = 0; row < bAvailability.length; row++) {
+            for (int col = 0; col < bAvailability.length; col++) {
+                System.out.print(bAvailability[row][col] + "   ");
+            }
+            System.out.println("");
             System.out.println("");
         }
         
-        for (int x = 0; x < bAvailability.length; x++) {
-            for (int y = 0; y < bAvailability.length; y++) {
-                System.out.print(bAvailability[x][y] + "   ");
-            }
-            System.out.println("");
-            System.out.println("");
-        }
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
     }
 }
 
