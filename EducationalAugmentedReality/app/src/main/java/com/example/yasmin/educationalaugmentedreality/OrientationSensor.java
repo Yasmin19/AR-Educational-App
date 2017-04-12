@@ -39,10 +39,8 @@ public class OrientationSensor extends Service {
 
             //register a sensor module
             mSensingKitLib.registerSensorModule(SKSensorModuleType.ACCELEROMETER);
-            //mSensingKitLib.registerSensorModule(SKSensorModuleType.MAGNETOMETER);
             //Start continuous sensing
             mSensingKitLib.startContinuousSensingWithSensor(SKSensorModuleType.ACCELEROMETER);
-            //mSensingKitLib.startContinuousSensingWithSensor(SKSensorModuleType.MAGNETOMETER);
             //subscribe to sensor data listener
             mSensingKitLib.subscribeSensorDataListener(SKSensorModuleType.ACCELEROMETER, new SKSensorDataListener() {
 

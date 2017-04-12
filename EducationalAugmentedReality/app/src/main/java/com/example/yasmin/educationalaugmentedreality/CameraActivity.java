@@ -2,12 +2,8 @@ package com.example.yasmin.educationalaugmentedreality;
 
 import android.content.Intent;
 import android.hardware.Camera;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -15,20 +11,15 @@ import android.widget.FrameLayout;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.maps.model.LatLng;
 
-import org.sensingkit.sensingkitlib.SKException;
-import org.sensingkit.sensingkitlib.SKSensorDataListener;
-import org.sensingkit.sensingkitlib.SKSensorModuleType;
-import org.sensingkit.sensingkitlib.SensingKitLib;
-import org.sensingkit.sensingkitlib.SensingKitLibInterface;
-import org.sensingkit.sensingkitlib.data.SKSensorData;
-
 import java.util.ArrayList;
 
-
-public class MainActivity extends AppCompatActivity {
+public class CameraActivity extends AppCompatActivity {
 
     public Button start;
     public EditText batteryText;
+    private Camera mCamera;
+    private CameraPreview mPreview;
+    private DrawSurfaceView mDrawView;
 
     ArrayList<Geofence> mGeofenceList; //List of geofences used
     ArrayList<String> mGeofenceNames; //List of geofence names
@@ -37,11 +28,20 @@ public class MainActivity extends AppCompatActivity {
 
     private static final LatLng ITL = new LatLng(51.522838, -0.043184);
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_camera);
+
+
+        //Create instance of Camera
+        mCamera = getCameraInstance();
+        //Create our Preview view and set it as the content of our activity
+        mPreview = new CameraPreview(this, mCamera);
+        FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
+        preview.addView(mPreview);
+
+        mDrawView = (DrawSurfaceView) findViewById(R.id.drawSurfaceView);
 
         populateGeofences();
 
@@ -49,25 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void sendMessage(View view){
-        Intent intent = new Intent(this, CrossWordActivity.class);
-        startActivity(intent);
-    }
+    /** A safe way to get an instance of the Camera object. */
 
-
-    public void testSensor() throws SKException {
-        final SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
-        mSensingKitLib.registerSensorModule(SKSensorModuleType.ROTATION);
-        mSensingKitLib.subscribeSensorDataListener(SKSensorModuleType.ROTATION, new SKSensorDataListener() {
-
-            @Override
-            public void onDataReceived(final SKSensorModuleType moduleType, final SKSensorData sensorData) {
-                System.out.println(sensorData.getDataInCSV());  // Print data in CSV format
-                Log.d("ROTATION", sensorData.getDataInCSV());
-            }
-        });
-
-
+    public static Camera getCameraInstance(){
+        Camera c = null;
+        try {
+            c = Camera.open(); // attempt to get a Camera instance
+        }
+        catch (Exception e){
+            // Camera is not available (in use or does not exist)
+        }
+        return c; // returns null if camera is unavailable
     }
 
     public void populateGeofences() {
@@ -80,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
         mGeofenceNames.add("ITL");
         //mGeofenceNames.add("Varey House/The Curve");
         //mGeofenceNames.add("Village Shop/Beaumont Court");
-       // mGeofenceNames.add("Santander Bank");
-       // mGeofenceNames.add("Canalside");
+        // mGeofenceNames.add("Santander Bank");
+        // mGeofenceNames.add("Canalside");
 
 
         mGeofenceCoordinates.add(ITL);
@@ -104,5 +96,4 @@ public class MainActivity extends AppCompatActivity {
         mGeofenceStore = new GeofenceStore(this, mGeofenceList); //Send over context and geofence list
 
     }
-
 }
