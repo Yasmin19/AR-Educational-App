@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         populateGeofences();
 
-        startService(new Intent(getApplicationContext(), OrientationSensor.class));
+        //startService(new Intent(getApplicationContext(), OrientationSensor.class));
 
     }
 
