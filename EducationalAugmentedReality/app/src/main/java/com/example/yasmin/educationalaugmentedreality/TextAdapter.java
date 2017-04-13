@@ -6,6 +6,7 @@ package com.example.yasmin.educationalaugmentedreality;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -47,15 +48,24 @@ public class TextAdapter extends BaseAdapter {
             textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
             textView.setBackgroundResource(R.drawable.rounded_box);
             textView.setPadding(5, 5, 5, 5);
-            textView.setLayoutParams(new GridView.LayoutParams(85,85));
-            textView.setText("Y");
+            textView.setLayoutParams(new GridView.LayoutParams(100, 100));
         } else {
             // imageView = (ImageView) convertView;
             textView = (TextView) convertView;
         }
 
-        // imageView.setImageResource(R.drawable.box);
+        textView.setText(String.valueOf(CrossWord.getItem(position)));
+
+        if (String.valueOf(CrossWord.getItem(position)).equals("-")){
+            textView.setBackgroundResource(R.drawable.rounded_box_transparent);
+        }
+        //textView.setText(String.valueOf('Y'));
+
+        //Log.d("Item", "" + CrossWord.getItem(position));
         return textView;
     }
 
 }
+
+
+

@@ -11,21 +11,18 @@ import android.widget.Toast;
 
 public class CrossWordActivity extends AppCompatActivity {
 
-    private static char[][] board = new char[10][10];
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cross_word);
 
-        for (int x = 0; x < board.length; x++) {
-            for (int y = 0; y < board.length; y++) {
-                board[x][y] = '-';
-            }
-        }
+
+        CrossWord.populateList();
+        CrossWord.rearrange();
+        CrossWord.populateBoard();
+
 
         GridView grid = (GridView) findViewById(R.id.grid);
-        //grid.setAdapter(new ImageAdapter(this));
         grid.setAdapter(new TextAdapter(this));
 
 
