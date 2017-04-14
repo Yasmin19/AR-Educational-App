@@ -344,8 +344,6 @@ public class CrossWord {
         colStr = posStr.charAt(1);
         row = Character.getNumericValue(rowStr);
         col = Character.getNumericValue(colStr);
-        Log.d("Item", ""+row);
-        Log.d("Item", ""+col);
 
         return board[row][col];
     }

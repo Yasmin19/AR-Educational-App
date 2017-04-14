@@ -49,9 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void sendMessage(View view){
-        Intent intent = new Intent(this, CrossWordActivity.class);
-        startActivity(intent);
+    public void onClick(View view){
+
+        if (view.getId() == R.id.next) {
+            Intent intent = new Intent(this, CrossWordActivity.class);
+            startActivity(intent);
+        }
+        else if (view.getId() == R.id.map){
+            Intent intent = new Intent(this, MapsActivity.class);
+            startActivity(intent);
+        }
+
     }
 
 

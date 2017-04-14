@@ -15,7 +15,14 @@
         android:text="Button"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:onClick="sendMessage"/>
+        android:onClick="onClick"/>
+
+    <Button
+        android:id="@+id/map"
+        android:text="Map"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:onClick="onClick"/>
 
 </RelativeLayout>
 
