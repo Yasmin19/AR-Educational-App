@@ -43,16 +43,7 @@ public class DrawSurfaceView extends View {
 
         int mAzimuth = OrientationSensor.mAzimuth;
 
-       // 0.51714754
-        //0.5554548
-        //scale values
-        ///float X = linear_acceleration[0];
-        //float Y = linear_acceleration[1];
-
-       // x = (linear_acceleration[0]) * 100;
-
-
-        x = (objectAzimuth - mAzimuth)/10;
+        x = (objectAzimuth - mAzimuth) * 80;
         screenHeight = CameraActivity.getScreenHeight();
         screenWidth = CameraActivity.getScreenWidth();
 
