@@ -24,9 +24,11 @@ import java.security.Provider;
  */
 public class OrientationSensor extends Service {
 
-    int mAzimuth = 0; //degrees
+    static int mAzimuth = 0; //degrees
 
     float[] gData = new float[3]; //accelerometer
+    static float[] linear_acceleration = new float[3]; //acceleration minus gravitational force
+    float[] gravity = new float[3];
     float[] mData = new float[3]; //magnetometer
     float[] Rot = new float[9];
     float[] I = new float[9];
@@ -47,12 +49,29 @@ public class OrientationSensor extends Service {
                 @Override
                 public void onDataReceived(final SKSensorModuleType moduleType, final SKSensorData sensorData) {
 
-                    Log.d("ACCELEROMETER", sensorData.getDataInCSV());
+                    //Log.d("ACCELEROMETER", sensorData.getDataInCSV());
                     SKAccelerometerData accelerometerData = (SKAccelerometerData) sensorData;
-                    Log.d("ACCELEROMETER", accelerometerData.getX() + "");
+                    //Log.d("ACCELEROMETER", accelerometerData.getX() + "");
+
                     gData[0] = accelerometerData.getX();
                     gData[1] = accelerometerData.getY();
                     gData[2] = accelerometerData.getZ();
+
+                    // Applying filter to isolate the force of gravity
+                    // alpha calculated as t/t(t+dT)
+
+                    final float alpha = 0.8f;
+
+                    gravity[0] = alpha * gravity[0] + (1 - alpha) * gData[0];
+                    gravity[1] = alpha * gravity[1] + (1 - alpha) * gData[1];
+                    gravity[2] = alpha * gravity[2] + (1 - alpha) * gData[2];
+
+                    linear_acceleration[0] = gData[0] - gravity[0];
+                    linear_acceleration[1] = gData[1] - gravity[1];
+                    linear_acceleration[2] = gData[2] - gravity[2];
+
+                    Log.d("ACCELEROMETER", "" + linear_acceleration[0] + ", " + linear_acceleration[1]
+                            + ", " + linear_acceleration[2]);
 
                 }
             });
@@ -96,7 +115,7 @@ public class OrientationSensor extends Service {
         return null;
     }
 
-    public int getAzimuth(){
+    public static int getAzimuth(){
         return mAzimuth;
     }
 }

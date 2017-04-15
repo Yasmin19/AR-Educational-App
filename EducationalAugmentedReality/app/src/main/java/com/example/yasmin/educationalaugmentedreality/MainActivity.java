@@ -67,21 +67,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void testSensor() throws SKException {
-        final SensingKitLibInterface mSensingKitLib = SensingKitLib.getSensingKitLib(this);
-        mSensingKitLib.registerSensorModule(SKSensorModuleType.ROTATION);
-        mSensingKitLib.subscribeSensorDataListener(SKSensorModuleType.ROTATION, new SKSensorDataListener() {
-
-            @Override
-            public void onDataReceived(final SKSensorModuleType moduleType, final SKSensorData sensorData) {
-                System.out.println(sensorData.getDataInCSV());  // Print data in CSV format
-                Log.d("ROTATION", sensorData.getDataInCSV());
-            }
-        });
-
-
-    }
-
     public void populateGeofences() {
 
         //Empty list for storing geofences

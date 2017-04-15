@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -16,17 +17,12 @@ import java.util.ArrayList;
  */
 public class DrawSurfaceView extends View {
 
-    Point me = new Point(-33.870932d, 151.204727d, "Me");
     Paint mPaint = new Paint();
     private Bitmap mDinosaur;
+    private int screenWidth, screenHeight = 0;
+    private float x, y = 0;
+    private int objectAzimuth = 140;
 
-    public static ArrayList<Point> props = new ArrayList<Point>();
-    static {
-        props.add(new Point(90d, 110.8000, "North Pole"));
-        props.add(new Point(-90d, -110.8000, "South Pole"));
-        props.add(new Point(-33.870932d, 151.8000, "East"));
-        props.add(new Point(-33.870932d, 150.8000, "West"));
-    }
 
     public DrawSurfaceView(Context c, Paint paint){
         super(c);
@@ -35,16 +31,44 @@ public class DrawSurfaceView extends View {
     public DrawSurfaceView(Context context, AttributeSet set){
         super(context, set);
 
-        mPaint.setColor(Color.GREEN);
-        mPaint.setTextSize(50);
-        mPaint.setStrokeWidth(20);
-        mPaint.setAntiAlias(true);
-
         mDinosaur = BitmapFactory.decodeResource(context.getResources(),R.drawable.dinosaur);
 
     }
 
     protected void onDraw(Canvas canvas){
-        canvas.drawBitmap(mDinosaur, 0, 0, mPaint);
+
+        float imageCentreX = mDinosaur.getWidth()/2;
+        float imageCentreY = mDinosaur.getHeight()/2;
+
+
+        int mAzimuth = OrientationSensor.mAzimuth;
+
+       // 0.51714754
+        //0.5554548
+        //scale values
+        ///float X = linear_acceleration[0];
+        //float Y = linear_acceleration[1];
+
+       // x = (linear_acceleration[0]) * 100;
+
+
+        x = (objectAzimuth - mAzimuth)/10;
+        screenHeight = CameraActivity.getScreenHeight();
+        screenWidth = CameraActivity.getScreenWidth();
+
+
+        //canvas.drawBitmap(mDinosaur, 0, 0, mPaint);
+        //canvas.drawBitmap(mDinosaur, imageCentreX + OrientationSensor.gData[0], imageCentreY + OrientationSensor.gData[1], mPaint);
+        canvas.drawBitmap(mDinosaur, x, y, mPaint);
+        Log.d("DRAW", "" + x);
+
+       // x++;
+       // y++;
+        invalidate(); //re-draw
+    }
+
+
+    public void calculateDistance(){
+
     }
 }

@@ -1,9 +1,11 @@
 package com.example.yasmin.educationalaugmentedreality;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.hardware.Camera;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -62,12 +64,20 @@ public class CameraActivity extends AppCompatActivity {
         return c; // returns null if camera is unavailable
     }
 
+    public static int getScreenWidth(){
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getScreenHeight(){
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
+    }
     public void populateGeofences() {
 
         //Empty list for storing geofences
         mGeofenceNames = new ArrayList<String>();
         mGeofenceCoordinates = new ArrayList<LatLng>();
         mGeofenceList = new ArrayList<Geofence>();
+
 
         mGeofenceNames.add("ITL");
         //mGeofenceNames.add("Varey House/The Curve");

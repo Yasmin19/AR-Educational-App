@@ -26,7 +26,6 @@ public class CrossWordActivity extends AppCompatActivity {
         grid.setAdapter(new TextAdapter(this));
 
 
-
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
