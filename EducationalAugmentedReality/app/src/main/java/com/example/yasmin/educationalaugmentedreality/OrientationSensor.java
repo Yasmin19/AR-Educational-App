@@ -96,4 +96,7 @@ public class OrientationSensor extends Service {
         return null;
     }
 
+    public int getAzimuth(){
+        return mAzimuth;
+    }
 }

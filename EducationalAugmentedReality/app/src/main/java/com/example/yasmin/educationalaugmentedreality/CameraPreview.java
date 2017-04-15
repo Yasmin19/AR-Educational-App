@@ -7,6 +7,7 @@ import android.view.SurfaceView;
 import android.hardware.Camera;
 
 import java.io.IOException;
+import java.security.Policy;
 
 /**
  * Created by Yasmin on 01/12/2016.
@@ -31,8 +32,14 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, now tell the camera where to draw the preview.
         try {
+            Camera.Parameters params = mCamera.getParameters();
+            params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+            mCamera.setParameters(params);
+
             mCamera.setPreviewDisplay(holder);
+            mCamera.setDisplayOrientation(90);
             mCamera.startPreview();
+
         } catch (IOException e) {
             Log.d(TAG, "Error setting camera preview: " + e.getMessage());
         }

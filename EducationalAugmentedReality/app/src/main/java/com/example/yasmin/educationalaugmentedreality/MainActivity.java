@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, MapsActivity.class);
             startActivity(intent);
         }
+        else if (view.getId() == R.id.cameraButton) {
+            Intent intent = new Intent(this, CameraActivity.class);
+            startActivity(intent);
+        }
 
     }
 

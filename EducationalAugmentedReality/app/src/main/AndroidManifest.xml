@@ -9,7 +9,9 @@
         android:name="android.hardware.camera.autofocus"
         android:required="true" />
 
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -48,7 +50,10 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".TeacherMapActivity"
+            android:label="@string/title_activity_teacher_map"></activity>
     </application>
 
 </manifest>
