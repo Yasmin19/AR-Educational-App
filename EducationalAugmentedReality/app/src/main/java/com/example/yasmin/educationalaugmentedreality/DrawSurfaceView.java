@@ -43,7 +43,8 @@ public class DrawSurfaceView extends View {
 
         int mAzimuth = OrientationSensor.mAzimuth;
 
-        x = (objectAzimuth - mAzimuth) * 80;
+        //Finding difference in azimuth and scaling value
+        x = (objectAzimuth - mAzimuth) * 50;
         screenHeight = CameraActivity.getScreenHeight();
         screenWidth = CameraActivity.getScreenWidth();
 
@@ -53,8 +54,6 @@ public class DrawSurfaceView extends View {
         canvas.drawBitmap(mDinosaur, x, y, mPaint);
         Log.d("DRAW", "" + x);
 
-       // x++;
-       // y++;
         invalidate(); //re-draw
     }
 

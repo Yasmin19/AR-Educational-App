@@ -64,12 +64,13 @@
         android:text="Search"
         android:id="@+id/searchLoc"
         android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/imageView" />
+        android:layout_toEndOf="@+id/desc"
+        android:layout_marginStart="70dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/wordField"
         android:layout_below="@+id/word"
         android:layout_alignParentStart="true"
         android:layout_alignEnd="@+id/desc" />
@@ -79,7 +80,7 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/descField"
         android:layout_below="@+id/desc"
         android:layout_alignParentStart="true" />
 
@@ -90,6 +91,32 @@
         android:layout_alignBottom="@+id/searchLoc"
         android:layout_alignParentStart="true"
         android:layout_toStartOf="@+id/searchLoc"
-        android:text="                  ," />
+        android:layout_alignEnd="@+id/textView" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:text="                 "
+        android:layout_alignBottom="@+id/searchLoc"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=","
+        android:id="@+id/textView2"
+        android:layout_alignBottom="@+id/editText3"
+        android:layout_toEndOf="@+id/editText3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/addButton"
+        android:layout_below="@+id/editText"
+        android:layout_alignEnd="@+id/searchLoc"
+        android:layout_marginTop="170dp" />
 
 </RelativeLayout>
