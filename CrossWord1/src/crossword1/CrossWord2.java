@@ -19,6 +19,7 @@ public class CrossWord2 {
     private static boolean[][] bAvailability = new boolean[10][10];
     private static List<String> words = new ArrayList<>();
     private static HashMap<String,Boolean> loc = new HashMap<String,Boolean>();
+    private static boolean cont = true;
 
     public static void populateList() {
         words.add("DINOSAUR");
@@ -78,6 +79,7 @@ public class CrossWord2 {
         int length = word.length();
         Random random = new Random();
         boolean across = random.nextBoolean();
+        boolean top = random.nextBoolean();
         int startx = 0;
         int starty = 0;
         
@@ -104,49 +106,67 @@ public class CrossWord2 {
             }
         }
 
+             System.out.println("-------------------");
+        System.out.println("------------NEW RUN----------");
+        System.out.println(word);
+        
         word = "ORANGE";
        
-        //look for any intersections
-        for (int pos=0; pos<word.length(); pos++){ //Loop through each letter
-            for (int row=board.length-1; row>=0; row--){
-                for (int col=board.length-1; col>=0; col--){
-                    if (board[row][col] == word.charAt(pos)){
-                        if (check(word, row, col, pos))
-                            break;//If return true, break out of loop
-                    }
-                }
-            }
-        }
-             
-        word = "RABBIT";
-       
-        //look for any intersections
-        for (int pos=0; pos<word.length(); pos++){ //Loop through each letter
-            for (int row=0; row<board.length; row++){
-                for (int col=0; col<board.length; col++){
-                    if (board[row][col] == word.charAt(pos)){
-                        if (check(word, row, col, pos))
-                            break;//If return true, break out of loop
-                    }
-                }
-            }
-        }
-             
-       
-    
-        word = "BALL";
-               //look for any intersections
-        for (int pos=0; pos<word.length(); pos++){ //Loop through each letter
-            for (int row=board.length-1; row>=0; row--){
-                for (int col=board.length-1; col>=0; col--){
-                    if (board[row][col] == word.charAt(pos)){
-                        if (check(word, row, col, pos))
-                            break;//If return true, break out of loop
-                    }
-                }
-            }
-        }
+            System.out.println("-------------------");
+        System.out.println("------------NEW RUN----------");
+        System.out.println(word);
         
+        /*
+        for (int i=1; i<words.size(); i++){
+            search(words.get(i));
+        }*/
+        
+        search("BICYCLE");
+        search("ORANGE");
+        search("RABBIT");
+        search("BALL");
+        
+    }
+    
+    public static void search(String word){
+        Random random = new Random();
+        boolean top = random.nextBoolean();
+        
+        cont = true;
+        if (top){
+ //look for any intersections
+            for (int row=0; row<board.length; row++){
+                for (int col=0; col<board.length; col++){  
+                    if (cont){
+                        for (int pos=0; pos<word.length(); pos++){ //Loop through each letter
+                            System.out.println("~~~~~" + word.charAt(pos) + "~~~~~");
+                            if (board[row][col] == word.charAt(pos)){
+                                if (check(word, row, col, pos))
+                                    break;//If return true, break out of loop
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else{
+                 //look for any intersections
+            for (int row=board.length-1; row>=0; row--){
+                for (int col=board.length-1; col>=0; col--){
+                    if (cont){
+                        for (int pos=0; pos<word.length(); pos++){ //Loop through each letter
+                            if (board[row][col] == word.charAt(pos)){
+                                System.out.println("~~~~~" + word.charAt(pos) + "~~~~~");
+                                System.out.println("----" + row + " " + col + "----");
+                                if (check(word, row, col, pos))
+                                    break;//If return true, break out of loop
+                            }
+                        }
+                    }
+                }
+            }  
+        }
+ 
          
     }
     
@@ -155,16 +175,13 @@ public class CrossWord2 {
         boolean down = false;
         int lettercount = 0;
         
-        System.out.println("-------------------");
-        System.out.println("------------NEW RUN----------");
-        System.out.println(word);
-        
+   
         if ((col-1)>=0)
             loc.put("LEFT", true);
         else
             loc.put("LEFT", false);
         
-        if ((col+1)>=0)
+        if ((col+1)>=10)
             loc.put("RIGHT", true);
         else
             loc.put("RIGHT", false);
@@ -174,7 +191,7 @@ public class CrossWord2 {
         else
             loc.put("TOP", false);
         
-        if ((row+1)>=0)
+        if ((row+1)>=10)
             loc.put("BOTTOM", true);
         else
             loc.put("BOTTOM", false);
@@ -187,6 +204,7 @@ public class CrossWord2 {
         */
 
         /************************/
+        System.out.println("COL " + col);
         System.out.println("RIGHT: " + (row) + " " + (col+1));
         
         //1st checks
@@ -247,7 +265,7 @@ public class CrossWord2 {
                 for (int c=start; c<start+word.length(); c++){
                     System.out.println(word + " has passed the board test"); 
                     if (!bAvailability[row][c]){
-                        if (c!=pos){
+                        if (c!=col){
                             System.out.println("I've failed :("); 
                             return false;
                         }
@@ -260,18 +278,20 @@ public class CrossWord2 {
                     lettercount++;
                 }
             }
+            cont = false;
             return true;
         }
         /*******************************************/
         if (down){
             if ((row >= pos)//BEFORE
                     && (board.length - row >= word.length() - pos)){ //AFTER
+                System.out.println("POS " + pos);
                 //3rd check
                 int start = row-pos;
                 for (int r= start; r<start+word.length(); r++){
                     System.out.println(word + " has passed the board test");
                         if (!(bAvailability[r][col])){ //Check if occupied 
-                            if (r!=pos){ //Make sure not to include intersection field  {               
+                            if (r!=row){ //Make sure not to include intersection field  {               
                                 System.out.println("I've failed :("); 
                                 return false;
                             }
@@ -285,6 +305,7 @@ public class CrossWord2 {
                 }
             }  
         }
+        cont = false;
         return true;
     }
 
