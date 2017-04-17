@@ -53,7 +53,8 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".TeacherMapActivity"
-            android:label="@string/title_activity_teacher_map"></activity>
+            android:label="@string/title_activity_teacher_map" />
+        <activity android:name=".TeacherLoginActivity"></activity>
     </application>
 
 </manifest>

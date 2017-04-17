@@ -13,9 +13,10 @@ public class Items {
     ArrayList<Items> itemsList = new ArrayList<Items>();
 
     public Items(String w, String d, String i, LatLng loc){
-        itemsList.add(new Items())
-    }
 
+        //itemsList.add(new Items())
+    }
+/*
     public String getWord(){
 
     }
@@ -30,9 +31,9 @@ public class Items {
     public String imagePath(){
 
     }
-
-    public Items[] getItem(){
-
+*/
+    public ArrayList<Items> getItem(){
+        return itemsList;
     }
 
     public int getItemsNumber(){

@@ -9,6 +9,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class DrawSurfaceView extends View {
     private int screenWidth, screenHeight = 0;
     private float x, y = 0;
     private int objectAzimuth = 140;
+    private int prevAz = 0;
 
 
     public DrawSurfaceView(Context c, Paint paint){
@@ -44,17 +47,26 @@ public class DrawSurfaceView extends View {
         int mAzimuth = OrientationSensor.mAzimuth;
 
         //Finding difference in azimuth and scaling value
-        x = (objectAzimuth - mAzimuth) * 50;
+        //Get rid of any extreme/outlier values and round
+        if (Math.abs(mAzimuth-prevAz) <= 5) {
+            x = (objectAzimuth - (Math.round(mAzimuth/5)*5)) * 50;
+        }
+        else{
+            x = (objectAzimuth - prevAz) * 50;
+        }
+
         screenHeight = CameraActivity.getScreenHeight();
         screenWidth = CameraActivity.getScreenWidth();
-
-
         //canvas.drawBitmap(mDinosaur, 0, 0, mPaint);
         //canvas.drawBitmap(mDinosaur, imageCentreX + OrientationSensor.gData[0], imageCentreY + OrientationSensor.gData[1], mPaint);
+       /*
         canvas.drawBitmap(mDinosaur, x, y, mPaint);
         Log.d("DRAW", "" + x);
+*/
 
+        prevAz = mAzimuth;
         invalidate(); //re-draw
+        //postInvalidateOnAnimation();
     }
 
 

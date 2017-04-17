@@ -58,7 +58,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             public void onLocationChanged(Location loc) {
                 float acc = loc.getAccuracy();
-                Log.d("Location", "I've moved!!!");
                 LatLng current = new LatLng(loc.getLatitude(), loc.getLongitude());
                 loc.getLatitude();
                 loc.getLongitude();

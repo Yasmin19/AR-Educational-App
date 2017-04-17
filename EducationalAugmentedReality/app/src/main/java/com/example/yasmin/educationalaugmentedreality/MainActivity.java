@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         populateGeofences();
-
-        //startService(new Intent(getApplicationContext(), OrientationSensor.class));
-
     }
 
     public void onClick(View view){
@@ -61,6 +58,10 @@ public class MainActivity extends AppCompatActivity {
         }
         else if (view.getId() == R.id.cameraButton) {
             Intent intent = new Intent(this, CameraActivity.class);
+            startActivity(intent);
+        }
+        else if (view.getId() == R.id.teacherButton) {
+            Intent intent = new Intent(this, TeacherActivity.class);
             startActivity(intent);
         }
 
