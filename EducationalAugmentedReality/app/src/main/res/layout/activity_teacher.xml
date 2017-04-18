@@ -20,10 +20,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Word"
-        android:id="@+id/word"
-        android:layout_above="@+id/wordField"
-        android:layout_centerHorizontal="true" />
+        android:text="Object #1"
+        android:id="@+id/object"
+        android:layout_below="@+id/imageView"
+        android:layout_alignStart="@+id/desc" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,18 +61,17 @@
         android:text="Search"
         android:id="@+id/searchLoc"
         android:onClick="onClick"
-        android:layout_marginBottom="185dp"
+        android:layout_marginBottom="422dp"
         android:layout_above="@+id/addButton"
-        android:layout_toEndOf="@+id/lngText" />
+        android:layout_toEndOf="@+id/lngText"
+        android:layout_marginStart="47dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/wordField"
         android:layout_above="@+id/desc"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="51dp"
-        android:text="                        " />
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -126,5 +125,14 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="110dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Word"
+        android:id="@+id/textView3"
+        android:layout_above="@+id/wordField"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

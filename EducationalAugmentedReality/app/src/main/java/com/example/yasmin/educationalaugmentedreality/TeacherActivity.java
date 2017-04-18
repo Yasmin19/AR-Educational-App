@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -16,6 +20,8 @@ public class TeacherActivity extends AppCompatActivity {
     EditText descField;
     EditText latField;
     EditText lngField;
+    TextView objText;
+    LatLng objLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +32,33 @@ public class TeacherActivity extends AppCompatActivity {
         descField = (EditText) findViewById(R.id.descField);
         latField = (EditText) findViewById(R.id.latText);
         lngField = (EditText) findViewById(R.id.lngText);
+        objText = (TextView) findViewById(R.id.object);
     }
 
     public void onClick(View view) {
 
         if (view.getId() == R.id.addButton) {
-            if (!wordField.toString().matches("") || !descField.toString().matches("")){
-                //Can complete action
+            if (!wordField.toString().matches("") && !descField.toString().matches("")
+                    && !latField.toString().matches("") && !lngField.toString().matches("") ){
 
+               // Items i = new Items(wordField.toString(), descField.toString(), R.drawable.dinosaur,
+                //        objLocation);
 
+                Items i = new Items("yoyoyo");
+                Items.itemsList.add(i);
 
+                //Clear text fields ready for new object info input
+                wordField.setText("");
+                descField.setText("");
+                latField.setText("");
+                lngField.setText("");
+
+                //Get new heading to flash
+                Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                anim.setDuration(300);
+                objText.startAnimation(anim);
+                objText.setText("Object #" + (Items.getItemsNumber() + 1));
+                Log.d("DONE", ""+Items.getItemsNumber());
             }
 
         }
@@ -48,7 +71,7 @@ public class TeacherActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK){
-            LatLng objLocation = data.getExtras().getParcelable("location");
+            objLocation = data.getExtras().getParcelable("location");
             Toast.makeText(TeacherActivity.this, "" + objLocation,
                     Toast.LENGTH_SHORT).show();
 

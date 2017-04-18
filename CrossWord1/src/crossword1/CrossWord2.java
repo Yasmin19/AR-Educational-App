@@ -124,7 +124,9 @@ public class CrossWord2 {
         search("BICYCLE");
         search("ORANGE");
         search("RABBIT");
+        search("CHAIR");
         search("BALL");
+        search("KEY");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
         
     }
     
@@ -181,7 +183,7 @@ public class CrossWord2 {
         else
             loc.put("LEFT", false);
         
-        if ((col+1)>=10)
+        if ((col+1)<10)
             loc.put("RIGHT", true);
         else
             loc.put("RIGHT", false);
@@ -191,7 +193,7 @@ public class CrossWord2 {
         else
             loc.put("TOP", false);
         
-        if ((row+1)>=10)
+        if ((row+1)<10)
             loc.put("BOTTOM", true);
         else
             loc.put("BOTTOM", false);
