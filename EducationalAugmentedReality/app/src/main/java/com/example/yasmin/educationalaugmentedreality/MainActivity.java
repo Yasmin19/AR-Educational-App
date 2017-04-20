@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     public Button start;
     public EditText batteryText;
+    public static boolean startGame = false;
 
     ArrayList<Geofence> mGeofenceList; //List of geofences used
     ArrayList<String> mGeofenceNames; //List of geofence names

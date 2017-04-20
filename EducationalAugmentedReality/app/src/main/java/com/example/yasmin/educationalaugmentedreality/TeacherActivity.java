@@ -41,10 +41,9 @@ public class TeacherActivity extends AppCompatActivity {
             if (!wordField.toString().matches("") && !descField.toString().matches("")
                     && !latField.toString().matches("") && !lngField.toString().matches("") ){
 
-               // Items i = new Items(wordField.toString(), descField.toString(), R.drawable.dinosaur,
-                //        objLocation);
+                Items i = new Items(wordField.getText().toString(), descField.getText().toString(),
+                        objLocation);
 
-                Items i = new Items("yoyoyo");
                 Items.itemsList.add(i);
 
                 //Clear text fields ready for new object info input
@@ -59,6 +58,7 @@ public class TeacherActivity extends AppCompatActivity {
                 objText.startAnimation(anim);
                 objText.setText("Object #" + (Items.getItemsNumber() + 1));
                 Log.d("DONE", ""+Items.getItemsNumber());
+
             }
 
         }

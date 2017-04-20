@@ -48,7 +48,7 @@ public class TextAdapter extends BaseAdapter {
             textView.setBackgroundColor(Color.parseColor("#FFFFFF"));
             textView.setBackgroundResource(R.drawable.rounded_box);
             textView.setPadding(5, 5, 5, 5);
-            textView.setLayoutParams(new GridView.LayoutParams(100, 100));
+            textView.setLayoutParams(new GridView.LayoutParams(118, 130));
         } else {
             // imageView = (ImageView) convertView;
             textView = (TextView) convertView;
@@ -59,9 +59,7 @@ public class TextAdapter extends BaseAdapter {
         if (String.valueOf(CrossWord.getItem(position)).equals("-")){
             textView.setBackgroundResource(R.drawable.rounded_box_transparent);
         }
-        //textView.setText(String.valueOf('Y'));
 
-        //Log.d("Item", "" + CrossWord.getItem(position));
         return textView;
     }
 

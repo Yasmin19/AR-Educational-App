@@ -1,5 +1,7 @@
 package com.example.yasmin.educationalaugmentedreality;
 
+import android.util.Log;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -14,20 +16,13 @@ public class Items {
     int image;
     LatLng location;
     static ArrayList<Items> itemsList = new ArrayList<Items>();
+    static ArrayList<String> words = new ArrayList<String>();
 
-/*
-    public Items(String w, String d, int i, LatLng loc){
+    public Items(String w, String d, LatLng loc){
         word = w;
         desc = d;
-        image = i;
+        //image = i;
         location = loc;
-        itemsList.add(new Items(word, desc, image, location));
-    }
-*/
-
-    public Items(String w){
-        word = w;
-        //itemsList.add(new Items(word));
     }
 
     public String getWord(){
@@ -45,8 +40,18 @@ public class Items {
         return image;
     }
 
-    public ArrayList<Items> getItem(){
+    public static ArrayList<Items> getItemList(){
         return itemsList;
+    }
+
+    public static ArrayList<String> getWordList(){
+
+        for (int i=0; i<itemsList.size(); i++){
+            words.add(itemsList.get(i).getWord());
+            Log.d("CROSS", ""+itemsList.get(i).getWord());
+        }
+
+        return words;
     }
 
     public static int getItemsNumber(){

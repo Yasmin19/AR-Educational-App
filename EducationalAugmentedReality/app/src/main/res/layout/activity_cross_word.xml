@@ -2,18 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_gravity="fill_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="700dp"
+        android:layout_width="630dp"
         android:layout_height="match_parent"
         tools:context="com.example.yasmin.educationalaugmentedreality.CrossWordActivity"
-
+        android:verticalSpacing="4dp"
         android:id="@+id/grid"
         android:numColumns="10"
         android:gravity="center"
         android:background="@drawable/gradient_background" >
     </GridView>
+
+
+    <LinearLayout
+        android:layout_gravity="fill_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="20dp"/>
 </LinearLayout>
 
