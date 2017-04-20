@@ -50,7 +50,6 @@ public class Items {
             words.add(itemsList.get(i).getWord());
             Log.d("CROSS", ""+itemsList.get(i).getWord());
         }
-
         return words;
     }
 

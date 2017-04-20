@@ -55,7 +55,7 @@ public class CrossWord {
         //SHOULD HAVE CLASS CALLED WORD THAT CONTAINS LENGTH OF WORD ETC.. ARRAY OF WORDS?????
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board.length; y++) {
-                board[x][y] = '-';
+                board[x][y] = ' ';
             }
         }
 

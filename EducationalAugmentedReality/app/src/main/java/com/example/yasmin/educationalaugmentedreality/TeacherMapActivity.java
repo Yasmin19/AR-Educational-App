@@ -43,28 +43,6 @@ public class TeacherMapActivity extends FragmentActivity implements OnMapReadyCa
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMyLocationEnabled(true);
-/*
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            return;
-        }
-        Location myLocation = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-        // Location wasn't found, check the next most accurate place for the current location
-        if (myLocation == null) {
-            Criteria criteria = new Criteria();
-            criteria.setAccuracy(Criteria.ACCURACY_FINE);
-            // Finds a provider that matches the criteria
-            String provider = lm.getBestProvider(criteria, true);
-            // Use the provider to get the last known location
-
-            myLocation = lm.getLastKnownLocation(provider);
-            LatLng loc = new LatLng(myLocation.getLatitude(), myLocation.getLatitude());
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 17));
-        }
-*/
 
         mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
 
