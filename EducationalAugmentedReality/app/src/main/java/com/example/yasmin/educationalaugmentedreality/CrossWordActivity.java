@@ -46,11 +46,32 @@ public class CrossWordActivity extends AppCompatActivity {
 
                 int start = CrossWord.checkPosition(position);
 
-                for (int i=start; i<start+CrossWord.wordLength; i++) {
+                //Clear all previous selected boxes
+                for (int i=0; i<100; i++){
                     TextView textView = (TextView) grid.getChildAt(i);
-                    textView.setBackgroundResource(R.drawable.selected_box);
+                    textView.setBackgroundResource(R.drawable.rounded_box);
+                    //Set unused boxes as transparent again
+                    if (String.valueOf(CrossWord.getItem(i)).equals(" ")){
+                        textView.setBackgroundResource(R.drawable.rounded_box_transparent);
+                    }
                 }
 
+
+                Log.d("WORDLENGTH", "START: "+start);
+
+                if (CrossWord.wordOrientation.equals("ACROSS")) {
+                    for (int i = start; i < start + CrossWord.wordLength; i++) {
+                        TextView textView = (TextView) grid.getChildAt(i);
+                        textView.setBackgroundResource(R.drawable.selected_box);
+                    }
+                }
+                //For DOWN, need to add 10 with each letter
+                else {
+                    for (int i = start; i< (start + CrossWord.wordLength)*10; i=i+10) {
+                        TextView textView = (TextView) grid.getChildAt(i);
+                        textView.setBackgroundResource(R.drawable.selected_box);
+                    }
+                }
             }
         });
     }

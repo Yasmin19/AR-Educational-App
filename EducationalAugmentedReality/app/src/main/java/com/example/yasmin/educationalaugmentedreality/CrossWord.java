@@ -16,9 +16,11 @@ public class CrossWord {
     private static boolean[][] bAvailability = new boolean[10][10];
     private static ArrayList<String> words = new ArrayList<>();
     public static HashMap<String, Integer> wordPos = new HashMap<>();
+    public static HashMap<String, String> wordOrien = new HashMap<>();
     private static HashMap<String,Boolean> loc = new HashMap<String,Boolean>();
     private static boolean cont = true;
     public static int wordLength = 0;
+    public static String wordOrientation = "DOWN";
 
 
     public static void populateList() {
@@ -31,9 +33,11 @@ public class CrossWord {
         }
         ***************************/
 
-        words.add("YASMIN");
-        words.add("HI");
-        words.add("WHIT");
+        words.add("BICYCLE");
+        words.add("DINOSAUR");
+        words.add("BALL");
+        words.add("PHONE");
+
     }
 
     public static void rearrange() {
@@ -225,6 +229,7 @@ public class CrossWord {
                     }
                 }
                 wordPos.put(word, getPos(row, start));
+                wordOrien.put(word, "ACROSS");
                 for (int c=start; c<start+word.length(); c++){
                     board[row][c] = word.charAt(lettercount);
                     bAvailability[row][c] = false;
@@ -249,6 +254,7 @@ public class CrossWord {
 
                 }
                 wordPos.put(word, getPos(row, start));
+                wordOrien.put(word, "DOWN");
                 for (int r= start; r<start+word.length(); r++){
                     board[r][col] = word.charAt(lettercount);
                     bAvailability[r][col] = false;
@@ -289,13 +295,24 @@ public class CrossWord {
 
     public static int checkPosition(int pos){
 
-        //Only for across
-        for (String word: wordPos.keySet()){
-            if ((wordPos.get(word) <= pos) && ((wordPos.get(word) + word.length()) >= pos)){
-                wordLength = word.length();
-                return wordPos.get(word);
+        for (String word: wordPos.keySet()) {
+            if ((wordOrien.get(word)).equals("ACROSS")) {
+                if ((wordPos.get(word) <= pos) && ((wordPos.get(word) + word.length()) >= pos)) {
+                    wordLength = word.length();
+                    wordOrientation = "ACROSS";
+                    Log.d("WORDLENGTH", "WORD LENGTH: " + wordLength);
+                    return wordPos.get(word);
+                }
+            }
+            else {
+                if ((wordPos.get(word) <= pos) && (wordPos.get(word) + word.length() * 10 >= pos)) {
+                    wordLength = word.length();
+                    wordOrientation = "DOWN";
+                    return wordPos.get(word);
+                }
             }
         }
+
         return 0;
     }
 }

@@ -29,6 +29,8 @@ public class DrawSurfaceView extends View {
     int xVel, yVel = 0;
     float xDistance, yDistance, xPos, yPos = 0f;
     float[] history = new float[3];
+    public int myAzimuth = 0;
+    public boolean flag = false;
 
 
     public DrawSurfaceView(Context c, Paint paint){
@@ -43,6 +45,7 @@ public class DrawSurfaceView extends View {
         history[0] = 0;
         history[1] = 0;
         history[2] = 0;
+
 
         /***CHANGE SIZE OF IMAGE!!!!!!*******
 
@@ -59,6 +62,43 @@ public class DrawSurfaceView extends View {
 
         float frametime = 0.666f;
 
+        //Get initial Azimuth bearing, get a reading until reading is more than 0 degrees
+        if (!flag){
+            myAzimuth = OrientationSensor.mAzimuth;
+            if (myAzimuth > 0) {
+                flag = true;
+            }
+        }
+        //Retrieve azimuth readings from orientation sensor Service
+
+        int mAzimuth = OrientationSensor.mAzimuth;
+/*
+        if (Math.abs(mAzimuth - prevAz) >= 5){
+            mAzimuth = prevAz;
+        }
+*/
+        /*****************************
+         * USE AZIMUTH WITH A COMBINATION OF SPEED AND DISTANCE ECT TO GET A SMOOTHER TRANSITION!!!!!!!!!!!!!
+         ****************************/
+
+        //Calcuate new speed of rotation using suvat
+        //Approximate frame speed is 0.666f
+        Log.d("DISTANCE", "Start Azimuth: " + myAzimuth + ", Current Azimuth: " + mAzimuth);
+        Log.d("DISTANCE", ""+ (Math.round((myAzimuth - mAzimuth)/10)*10));
+        //xVel += (int)((Math.round((myAzimuth - mAzimuth)/10)*10) / (frametime*80));
+        xVel += (Math.round((myAzimuth - mAzimuth)/10)*10)/ (frametime);
+        yVel += (int)(OrientationSensor.linear_acceleration[1] * frametime);
+
+        //Calculate distance that it has travelled
+        xPos = (float) 0.05 * xVel * frametime;
+        yDistance = (float) (0.5 * yVel) * frametime;
+
+        //Inverse the distance readings so that object will move in the right direction
+        //xPos -= xDistance;
+        yPos -= yDistance;
+
+
+
         if (history[0] - OrientationSensor.linear_acceleration[0] > 2){
             Log.d("MOVEMENT", "LEFT AT [0] ---- 'x'");
         }
@@ -71,14 +111,6 @@ public class DrawSurfaceView extends View {
             Log.d("MOVEMENT", "LEFT AT [2]  ---- 'z'");
         }
 
-        //Calcuate new speed of rotation using suvat
-        //Approximate frame speed is 0.666f
-        xVel +=(int)(OrientationSensor.linear_acceleration[1] * frametime) ;
-        yVel += (int)(OrientationSensor.linear_acceleration[1] * frametime);
-
-        //Calculate distance that it has travelled
-        xDistance = (float) ((xVel * frametime) + (0.5 * (OrientationSensor.linear_acceleration[1] * 0.444f)));
-        yDistance = (float) (0.5 * yVel) * frametime;
 
 /*
         //Calcuate new speed of rotation using suvat
@@ -87,17 +119,24 @@ public class DrawSurfaceView extends View {
         yVel += (int)(OrientationSensor.linear_acceleration[1] * 0.666f);
 
         //Calucate distance that it has travelled
-        float xDistance = (float) 0.5 * (xVel + OrientationSensor.linear_acceleration[1]) * 0.666f;
-        float yDistance = (float) 0.5 * (yVel + OrientationSensor.linear_acceleration[1]) * 0.666f;
-        ***************/
+        xDistance = (float) 0.5 * (xVel + OrientationSensor.linear_acceleration[1]) * 0.666f;
+        yDistance = (float) 0.5 * (yVel + OrientationSensor.linear_acceleration[1]) * 0.666f;
 
         //Inverse the distance readings so that object will move in the right direction
         xPos -= xDistance;
         yPos -= yDistance;
+        ***************/
 
-        //Retrieve azimuth readings from orientation sensor Service
-        int mAzimuth = OrientationSensor.mAzimuth;
+        //Finding difference in azimuth and scaling value
+        //Get rid of any extreme/outlier values and round
+        if (Math.abs(mAzimuth-prevAz) <= 5) {
+            x = (myAzimuth - (Math.round(mAzimuth/5)*5))* 50;
+        }
+        else{
+            x = ((myAzimuth - prevAz) * 5) * 50;
+        }
 
+        /*
         //Finding difference in azimuth and scaling value
         //Get rid of any extreme/outlier values and round
         if (Math.abs(mAzimuth-prevAz) <= 5) {
@@ -106,11 +145,11 @@ public class DrawSurfaceView extends View {
         else{
             x = (objectAzimuth - prevAz) * 50;
         }
-
+*/
         screenHeight = CameraActivity.getScreenHeight();
         screenWidth = CameraActivity.getScreenWidth();
 
-        canvas.drawBitmap(mDinosaur, xPos, 0, mPaint);
+        canvas.drawBitmap(mDinosaur, x, 0, mPaint);
         Log.d("DRAW", "" + x);
 
 
@@ -122,7 +161,6 @@ public class DrawSurfaceView extends View {
 
 
         invalidate(); //re-draw
-        //postInvalidateOnAnimation();
     }
 
 
