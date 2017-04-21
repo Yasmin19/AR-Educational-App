@@ -1,14 +1,20 @@
 package com.example.yasmin.educationalaugmentedreality;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.maps.model.LatLng;
@@ -48,6 +54,8 @@ public class CameraActivity extends AppCompatActivity {
         populateGeofences();
 
         startService(new Intent(getApplicationContext(), OrientationSensor.class));
+
+        //startService(new Intent(getApplicationContext(), MyOrientationListener.class));
 
     }
 
@@ -105,5 +113,10 @@ public class CameraActivity extends AppCompatActivity {
         //Add geofences to GeofenceStore obect
         mGeofenceStore = new GeofenceStore(this, mGeofenceList); //Send over context and geofence list
 
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
     }
 }

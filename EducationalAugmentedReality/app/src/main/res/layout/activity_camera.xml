@@ -16,17 +16,20 @@
 
         <FrameLayout
             android:id="@+id/camera_preview"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_width="620dp"
+            android:layout_height="850dp"
+            android:layout_gravity="top|center_vertical">
 
         </FrameLayout>
 
-        <com.example.yasmin.educationalaugmentedreality.DrawSurfaceView
-            android:id="@+id/drawSurfaceView"
-            android:layout_width="1500dp"
-            android:layout_height="800dp">
 
-        </com.example.yasmin.educationalaugmentedreality.DrawSurfaceView>
+        <com.example.yasmin.educationalaugmentedreality.DrawSurfaceView
+                android:id="@+id/drawSurfaceView"
+                android:layout_width="620dp"
+                android:layout_height="850dp"
+                android:layout_gravity="top|center_vertical">
+            </com.example.yasmin.educationalaugmentedreality.DrawSurfaceView>
+
     </FrameLayout>
 
 </RelativeLayout>

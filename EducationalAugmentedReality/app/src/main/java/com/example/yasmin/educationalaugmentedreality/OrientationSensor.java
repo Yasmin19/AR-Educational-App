@@ -33,6 +33,7 @@ public class OrientationSensor extends Service {
     float[] Rot = new float[9];
     float[] I = new float[9];
     float[] orient = new float[9];
+    static float timestamp;
 
     public int onStartCommand(Intent intent, int flags, int startId) {
 
@@ -56,6 +57,8 @@ public class OrientationSensor extends Service {
                     gData[0] = accelerometerData.getX();
                     gData[1] = accelerometerData.getY();
                     gData[2] = accelerometerData.getZ();
+
+                    timestamp = accelerometerData.getTimestamp();
 
                     // Applying filter to isolate the force of gravity
                     // alpha calculated as t/t(t+dT)

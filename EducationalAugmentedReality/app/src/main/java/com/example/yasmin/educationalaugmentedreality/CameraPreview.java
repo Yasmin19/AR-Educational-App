@@ -1,10 +1,13 @@
 package com.example.yasmin.educationalaugmentedreality;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.hardware.Camera;
+import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
 
 import java.io.IOException;
 import java.security.Policy;
