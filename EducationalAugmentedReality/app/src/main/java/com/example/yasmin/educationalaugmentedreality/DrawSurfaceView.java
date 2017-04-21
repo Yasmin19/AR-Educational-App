@@ -73,11 +73,11 @@ public class DrawSurfaceView extends View {
 
         //Calcuate new speed of rotation using suvat
         //Approximate frame speed is 0.666f
-        xVel +=(int)(OrientationSensor.linear_acceleration[1] * frametime);
+        xVel +=(int)(OrientationSensor.linear_acceleration[1] * frametime) ;
         yVel += (int)(OrientationSensor.linear_acceleration[1] * frametime);
 
-        //Calucate distance that it has travelled
-        xDistance = (float) (0.5 * xVel) * frametime;
+        //Calculate distance that it has travelled
+        xDistance = (float) ((xVel * frametime) + (0.5 * (OrientationSensor.linear_acceleration[1] * 0.444f)));
         yDistance = (float) (0.5 * yVel) * frametime;
 
 /*
@@ -89,16 +89,6 @@ public class DrawSurfaceView extends View {
         //Calucate distance that it has travelled
         float xDistance = (float) 0.5 * (xVel + OrientationSensor.linear_acceleration[1]) * 0.666f;
         float yDistance = (float) 0.5 * (yVel + OrientationSensor.linear_acceleration[1]) * 0.666f;
-
-
-
-        /*****************
-        xVel +=(int)(MyOrientationListener.linear_acceleration[2] * frametime);
-        yVel += (int)(MyOrientationListener.linear_acceleration[2] * frametime);
-
-        //Calucate distance that it has travelled
-        float xDistance = (float) 0.5 * (xVel + MyOrientationListener.linear_acceleration[2]) * frametime;
-        float yDistance = (float) 0.5 * (yVel + MyOrientationListener.linear_acceleration[2]) * frametime;
         ***************/
 
         //Inverse the distance readings so that object will move in the right direction

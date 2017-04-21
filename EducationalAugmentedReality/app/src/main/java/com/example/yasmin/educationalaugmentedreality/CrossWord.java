@@ -14,9 +14,11 @@ public class CrossWord {
 
     private static char[][] board = new char[10][10];
     private static boolean[][] bAvailability = new boolean[10][10];
-    private static List<String> words = new ArrayList<>();
+    private static ArrayList<String> words = new ArrayList<>();
+    public static HashMap<String, Integer> wordPos = new HashMap<>();
     private static HashMap<String,Boolean> loc = new HashMap<String,Boolean>();
     private static boolean cont = true;
+    public static int wordLength = 0;
 
 
     public static void populateList() {
@@ -27,7 +29,8 @@ public class CrossWord {
         for (int i=0; i<words.size(); i++){
             Log.d("CROSSWORD", ""+ words.get(i));
         }
-        */
+        ***************************/
+
         words.add("YASMIN");
         words.add("HI");
         words.add("WHIT");
@@ -221,7 +224,7 @@ public class CrossWord {
                         }
                     }
                 }
-
+                wordPos.put(word, getPos(row, start));
                 for (int c=start; c<start+word.length(); c++){
                     board[row][c] = word.charAt(lettercount);
                     bAvailability[row][c] = false;
@@ -245,6 +248,7 @@ public class CrossWord {
                     }
 
                 }
+                wordPos.put(word, getPos(row, start));
                 for (int r= start; r<start+word.length(); r++){
                     board[r][col] = word.charAt(lettercount);
                     bAvailability[r][col] = false;
@@ -255,6 +259,14 @@ public class CrossWord {
         cont = false;
         return true;
     }
+
+    public static int getPos(int row, int col){
+
+        int pos = Integer.parseInt(String.valueOf(row) + String.valueOf(col));
+
+        return pos;
+    }
+
 
     public static char getItem(int pos){
 
@@ -273,5 +285,17 @@ public class CrossWord {
         col = Character.getNumericValue(colStr);
 
         return board[row][col];
+    }
+
+    public static int checkPosition(int pos){
+
+        //Only for across
+        for (String word: wordPos.keySet()){
+            if ((wordPos.get(word) <= pos) && ((wordPos.get(word) + word.length()) >= pos)){
+                wordLength = word.length();
+                return wordPos.get(word);
+            }
+        }
+        return 0;
     }
 }

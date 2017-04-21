@@ -18,7 +18,7 @@
             android:id="@+id/camera_preview"
             android:layout_width="620dp"
             android:layout_height="850dp"
-            android:layout_gravity="top|center_vertical">
+            android:layout_gravity="top|center">
 
         </FrameLayout>
 
@@ -27,7 +27,7 @@
                 android:id="@+id/drawSurfaceView"
                 android:layout_width="620dp"
                 android:layout_height="850dp"
-                android:layout_gravity="top|center_vertical">
+                android:layout_gravity="top|center">
             </com.example.yasmin.educationalaugmentedreality.DrawSurfaceView>
 
     </FrameLayout>

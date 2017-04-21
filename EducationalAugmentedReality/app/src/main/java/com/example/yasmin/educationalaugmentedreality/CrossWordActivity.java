@@ -44,8 +44,12 @@ public class CrossWordActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
                 Log.d("POSITION", "" + position);
 
-                TextView textView = (TextView) grid.getChildAt(position);
-                textView.setBackgroundResource(R.drawable.selected_box);
+                int start = CrossWord.checkPosition(position);
+
+                for (int i=start; i<start+CrossWord.wordLength; i++) {
+                    TextView textView = (TextView) grid.getChildAt(i);
+                    textView.setBackgroundResource(R.drawable.selected_box);
+                }
 
             }
         });
