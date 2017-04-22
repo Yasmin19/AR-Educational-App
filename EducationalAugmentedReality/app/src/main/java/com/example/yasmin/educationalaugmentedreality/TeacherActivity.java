@@ -41,7 +41,7 @@ public class TeacherActivity extends AppCompatActivity {
             if (!wordField.toString().matches("") && !descField.toString().matches("")
                     && !latField.toString().matches("") && !lngField.toString().matches("") ){
 
-                Items i = new Items(wordField.getText().toString(), descField.getText().toString(),
+                Items i = new Items(wordField.getText().toString().toUpperCase(), descField.getText().toString(),
                         objLocation);
 
                 Items.itemsList.add(i);

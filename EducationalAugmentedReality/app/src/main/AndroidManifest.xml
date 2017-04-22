@@ -32,7 +32,6 @@
 
         <service android:name=".GeofenceTransitionsIntentService" />
         <service android:name=".OrientationSensor" />
-        <service android:name=".MyOrientationListener" />
 
         <activity android:name=".CameraActivity" />
         <activity android:name=".CrossWordActivity" />

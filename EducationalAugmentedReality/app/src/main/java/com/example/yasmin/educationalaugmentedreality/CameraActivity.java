@@ -24,7 +24,6 @@ import java.util.ArrayList;
 public class CameraActivity extends AppCompatActivity {
 
     public Button start;
-    public EditText batteryText;
     private Camera mCamera;
     private CameraPreview mPreview;
     private DrawSurfaceView mDrawView;

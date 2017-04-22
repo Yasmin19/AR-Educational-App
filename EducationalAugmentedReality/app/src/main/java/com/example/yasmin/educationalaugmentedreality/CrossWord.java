@@ -20,7 +20,8 @@ public class CrossWord {
     private static HashMap<String,Boolean> loc = new HashMap<String,Boolean>();
     private static boolean cont = true;
     public static int wordLength = 0;
-    public static String wordOrientation = "DOWN";
+    public static String selectedWord = "";
+    public static String wordOrientation = "ACROSS";
 
 
     public static void populateList() {
@@ -74,17 +75,15 @@ public class CrossWord {
 
         String word = words.get(0);//Get first word on list to place on board
 
-        int length = word.length();
         Random random = new Random();
         boolean across = random.nextBoolean();
-        boolean top = random.nextBoolean();
         int startx = 0;
         int starty = 0;
 
         int lettercount = 0;
         if (across) {
             startx = 4;
-            starty = (int)(Math.round((10 - word.length())/2)) - 1;
+            starty = (Math.round((10 - word.length())/2)) - 1;
 
             for (int col=starty; col<word.length()+starty; col++){
                 board[startx][col] = word.charAt(lettercount);
@@ -267,10 +266,7 @@ public class CrossWord {
     }
 
     public static int getPos(int row, int col){
-
-        int pos = Integer.parseInt(String.valueOf(row) + String.valueOf(col));
-
-        return pos;
+        return Integer.parseInt(String.valueOf(row) + String.valueOf(col));
     }
 
 
@@ -300,6 +296,7 @@ public class CrossWord {
                 if ((wordPos.get(word) <= pos) && ((wordPos.get(word) + word.length()) >= pos)) {
                     wordLength = word.length();
                     wordOrientation = "ACROSS";
+                    selectedWord = word;
                     Log.d("WORDLENGTH", "WORD LENGTH: " + wordLength);
                     return wordPos.get(word);
                 }
@@ -308,6 +305,7 @@ public class CrossWord {
                 if ((wordPos.get(word) <= pos) && (wordPos.get(word) + word.length() * 10 >= pos)) {
                     wordLength = word.length();
                     wordOrientation = "DOWN";
+                    selectedWord = word;
                     return wordPos.get(word);
                 }
             }

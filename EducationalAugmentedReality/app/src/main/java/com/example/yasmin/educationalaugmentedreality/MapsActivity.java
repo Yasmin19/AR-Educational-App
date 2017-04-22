@@ -46,7 +46,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+    }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+        mMap = googleMap;
+        //mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setCompassEnabled(true);
 
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -79,6 +86,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             }
 
+
             public void onStatusChanged(String s, int i, Bundle bundle) {
             }
 
@@ -90,14 +98,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-        mMap = googleMap;
-        //mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setCompassEnabled(true);
+        mMarker = mMap.addMarker(new MarkerOptions()
+                .position(Items.getLocation())
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.hiker)));
     }
 
 }

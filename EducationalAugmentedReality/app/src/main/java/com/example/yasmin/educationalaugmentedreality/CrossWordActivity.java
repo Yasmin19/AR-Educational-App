@@ -1,6 +1,8 @@
 package com.example.yasmin.educationalaugmentedreality;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -23,11 +25,9 @@ public class CrossWordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cross_word);
 
-
         CrossWord.populateList();
         CrossWord.rearrange();
         CrossWord.populateBoard();
-
 
         grid = (GridView) findViewById(R.id.grid);
         grid.setAdapter(new TextAdapter(this));
@@ -36,6 +36,7 @@ public class CrossWordActivity extends AppCompatActivity {
         AssetManager am = this.getApplicationContext().getAssets();
         font = Typeface.createFromAsset(am,
                 String.format("fonts/%s", "kids.ttf"));
+
 
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,5 +75,26 @@ public class CrossWordActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onClick(View view) {
+
+        if (view.getId() == R.id.mapButton) {
+
+            if (CrossWord.selectedWord.equals("")){
+                Toast.makeText(CrossWordActivity.this, "Select an empty box before continuing",
+                        Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Intent intent = new Intent(this, MapsActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        }
+    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK){
+            //PRINT WORD ONTO CROSSWORD
+        }
     }
 }
