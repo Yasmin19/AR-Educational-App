@@ -21,24 +21,26 @@ public class CrossWord {
     private static boolean cont = true;
     public static int wordLength = 0;
     public static String selectedWord = "";
-    public static String wordOrientation = "ACROSS";
+    public static String wordOrientation = "DOWN";
 
 
     public static void populateList() {
 
-        /* UnCOMMENT THIS LATER!!!!!
+
        words.addAll(Items.getWordList());
 
         for (int i=0; i<words.size(); i++){
             Log.d("CROSSWORD", ""+ words.get(i));
         }
-        ***************************/
 
+        words.add("IGLOO");
+
+/*
         words.add("BICYCLE");
         words.add("DINOSAUR");
         words.add("BALL");
         words.add("PHONE");
-
+*/
     }
 
     public static void rearrange() {
@@ -60,7 +62,7 @@ public class CrossWord {
     }
 
     public static void populateBoard() {
-        //SHOULD HAVE CLASS CALLED WORD THAT CONTAINS LENGTH OF WORD ETC.. ARRAY OF WORDS?????
+
         for (int x = 0; x < board.length; x++) {
             for (int y = 0; y < board.length; y++) {
                 board[x][y] = ' ';
@@ -81,6 +83,12 @@ public class CrossWord {
         int starty = 0;
 
         int lettercount = 0;
+
+
+        /*****/
+        across = false;
+        /*****/
+
         if (across) {
             startx = 4;
             starty = (Math.round((10 - word.length())/2)) - 1;
@@ -93,7 +101,7 @@ public class CrossWord {
 
         }
         else{
-            startx = (int)(Math.round((10 - word.length())/2)) - 1;
+            startx = (Math.round((10 - word.length())/2)) - 1;
             starty = 4;
 
             for (int row=startx; row<word.length()+startx; row++){
@@ -174,7 +182,7 @@ public class CrossWord {
         else
             loc.put("BOTTOM", false);
 
-        //1st checks
+        //2nd checks
         if (loc.get("LEFT") && loc.get("RIGHT")){
             if ((bAvailability[row][col+1]) && (bAvailability[row][col-1])){
                 across = true;
@@ -297,6 +305,7 @@ public class CrossWord {
                     wordLength = word.length();
                     wordOrientation = "ACROSS";
                     selectedWord = word;
+                    Log.d("SELECTED WORD", ""+word);
                     Log.d("WORDLENGTH", "WORD LENGTH: " + wordLength);
                     return wordPos.get(word);
                 }
@@ -306,6 +315,7 @@ public class CrossWord {
                     wordLength = word.length();
                     wordOrientation = "DOWN";
                     selectedWord = word;
+                    Log.d("SELECTEDDOWN", ""+word);
                     return wordPos.get(word);
                 }
             }

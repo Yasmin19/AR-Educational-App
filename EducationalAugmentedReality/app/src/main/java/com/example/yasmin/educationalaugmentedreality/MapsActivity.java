@@ -3,6 +3,7 @@ package com.example.yasmin.educationalaugmentedreality;
 import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -32,10 +33,13 @@ import org.sensingkit.sensingkitlib.SensingKitLib;
 import org.sensingkit.sensingkitlib.SensingKitLibInterface;
 import org.sensingkit.sensingkitlib.data.SKSensorData;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private Marker mMarker;
+    private Marker objMarker;
+    private Context mContext;
+    private LatLng objectLoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         //mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
+        mMap.setOnMarkerClickListener(this);
 
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
@@ -61,6 +66,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // TODO: Consider calling
             return;
         }
+
+        //Add marker for object
+        objectLoc =Items.getWordLocation(CrossWord.selectedWord);
+        objMarker = mMap.addMarker(new MarkerOptions()
+                .position(objectLoc)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.treasure)));
+
+
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
 
             public void onLocationChanged(Location loc) {
@@ -98,9 +111,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
-        mMarker = mMap.addMarker(new MarkerOptions()
-                .position(Items.getLocation())
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.hiker)));
+    }
+
+    public boolean onMarkerClick(final Marker marker) {
+        //When object marker is clicked on, start child activity of the camera view
+        if (marker.equals(objMarker))
+        {
+            CameraPosition cameraPosition = new CameraPosition.Builder()
+                    .target(objectLoc)
+                    .zoom(10)
+                    .tilt(60)
+                    .bearing(0)
+                    .build();
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+            Intent intent = new Intent(this, CameraActivity.class);
+            startActivityForResult(intent, 1);
+        }
+
+        return true;
     }
 
 }

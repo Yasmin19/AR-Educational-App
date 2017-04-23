@@ -14,7 +14,7 @@ public class Items {
     String word;
     String desc;
     int image;
-    LatLng location;
+    static LatLng location;
     static ArrayList<Items> itemsList = new ArrayList<Items>();
     static ArrayList<String> words = new ArrayList<String>();
 
@@ -32,7 +32,18 @@ public class Items {
     public String getDesc(){
         return desc;
     }
+
     public LatLng getLocation(){
+        return location;
+    }
+    public static LatLng getWordLocation(String w){
+
+        for (Items i: itemsList){
+            if (i.getWord().equals(w)){
+                return i.getLocation();
+            }
+        }
+
         return location;
     }
 

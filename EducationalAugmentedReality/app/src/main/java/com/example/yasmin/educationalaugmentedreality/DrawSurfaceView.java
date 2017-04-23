@@ -14,6 +14,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Yasmin on 15/03/2017.
@@ -24,7 +25,6 @@ public class DrawSurfaceView extends View {
     private Bitmap mDinosaur;
     private int screenWidth, screenHeight = 0;
     private float x, y = 0;
-    private int objectAzimuth = 140;
     private int prevAz = 0;
     int xVel, yVel = 0;
     float xDistance, yDistance, xPos, yPos = 0f;
@@ -46,6 +46,10 @@ public class DrawSurfaceView extends View {
         history[1] = 0;
         history[2] = 0;
 
+        //Generate random number between 0 and 359 degrees
+        Random random = new Random();
+        random.nextInt(360);
+
 
         /***CHANGE SIZE OF IMAGE!!!!!!*******
 
@@ -62,15 +66,7 @@ public class DrawSurfaceView extends View {
 
         float frametime = 0.666f;
 
-        //Get initial Azimuth bearing, get a reading until reading is more than 0 degrees
-        if (!flag){
-            myAzimuth = OrientationSensor.mAzimuth;
-            if (myAzimuth > 0) {
-                flag = true;
-            }
-        }
         //Retrieve azimuth readings from orientation sensor Service
-
         int mAzimuth = OrientationSensor.mAzimuth;
 /*
         if (Math.abs(mAzimuth - prevAz) >= 5){
@@ -98,7 +94,6 @@ public class DrawSurfaceView extends View {
         yPos -= yDistance;
 
 
-
         if (history[0] - OrientationSensor.linear_acceleration[0] > 2){
             Log.d("MOVEMENT", "LEFT AT [0] ---- 'x'");
         }
@@ -111,43 +106,23 @@ public class DrawSurfaceView extends View {
             Log.d("MOVEMENT", "LEFT AT [2]  ---- 'z'");
         }
 
-
-/*
-        //Calcuate new speed of rotation using suvat
-        //Approximate frame speed is 0.666f
-        xVel +=(int)(OrientationSensor.linear_acceleration[1] * 0.666f);
-        yVel += (int)(OrientationSensor.linear_acceleration[1] * 0.666f);
-
-        //Calucate distance that it has travelled
-        xDistance = (float) 0.5 * (xVel + OrientationSensor.linear_acceleration[1]) * 0.666f;
-        yDistance = (float) 0.5 * (yVel + OrientationSensor.linear_acceleration[1]) * 0.666f;
-
-        //Inverse the distance readings so that object will move in the right direction
-        xPos -= xDistance;
-        yPos -= yDistance;
-        ***************/
-
-        //Finding difference in azimuth and scaling value
-        //Get rid of any extreme/outlier values and round
-        if (Math.abs(mAzimuth-prevAz) <= 5) {
-            x = (myAzimuth - (Math.round(mAzimuth/5)*5))* 50;
-        }
-        else{
-            x = ((myAzimuth - prevAz) * 5) * 50;
-        }
-
-        /*
-        //Finding difference in azimuth and scaling value
-        //Get rid of any extreme/outlier values and round
-        if (Math.abs(mAzimuth-prevAz) <= 5) {
-            x = (objectAzimuth - (Math.round(mAzimuth/5)*5)) * 50;
-        }
-        else{
-            x = (objectAzimuth - prevAz) * 50;
-        }
-*/
         screenHeight = CameraActivity.getScreenHeight();
         screenWidth = CameraActivity.getScreenWidth();
+
+
+        //Finding difference in azimuth and scaling value
+        //Get rid of any extreme/outlier values and round
+        if (Math.abs(mAzimuth-prevAz) <= 5) {
+            x = (myAzimuth - (Math.round(mAzimuth/5)*5)) * 40;
+        }
+
+        if (history[1] - OrientationSensor.linear_acceleration[1] > 2){
+            //y = (history[1] - OrientationSensor.linear_acceleration[1]);
+        }
+
+        if (history[1] - OrientationSensor.linear_acceleration[1] > 1 || history[1] - OrientationSensor.linear_acceleration[1] < -1){
+
+        }
 
         canvas.drawBitmap(mDinosaur, x, 0, mPaint);
         Log.d("DRAW", "" + x);
@@ -159,7 +134,11 @@ public class DrawSurfaceView extends View {
         history[1] = OrientationSensor.linear_acceleration[1];
         history[2] = OrientationSensor.linear_acceleration[2];
 
-
+        /*
+        //Resize according to distance
+        Bitmap b = BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length)
+        profileImage.setImageBitmap(Bitmap.createScaledBitmap(b, 120, 120, false));
+        */
         invalidate(); //re-draw
     }
 

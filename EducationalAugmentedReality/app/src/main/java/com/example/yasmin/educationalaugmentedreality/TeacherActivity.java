@@ -22,6 +22,7 @@ public class TeacherActivity extends AppCompatActivity {
     EditText lngField;
     TextView objText;
     LatLng objLocation;
+    public static boolean cont = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,11 @@ public class TeacherActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TeacherMapActivity.class);
             startActivityForResult(intent, 1);
         }
+        else if (view.getId() == R.id.doneButton){
+            cont = true;
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
@@ -77,8 +83,6 @@ public class TeacherActivity extends AppCompatActivity {
 
             latField.setText(String.valueOf(objLocation.latitude));
             lngField.setText(String.valueOf(objLocation.longitude));
-
-
         }
     }
 }

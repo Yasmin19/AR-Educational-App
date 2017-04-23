@@ -12,13 +12,13 @@
 
 
     <Button
-        android:id="@+id/next"
-        android:text="Start"
+        android:id="@+id/playButton"
+        android:text="PLAY"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:onClick="onClick"
-        android:layout_above="@+id/howButton"
-        android:layout_alignStart="@+id/map" />
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/exitButton" />
 
     <Button
         android:id="@+id/map"
@@ -32,19 +32,10 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="How to play"
-        android:id="@+id/howButton"
-        android:onClick="onClick"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="Teacher&apos;s Login"
         android:id="@+id/teacherButton"
         android:onClick="onClick"
-        android:layout_below="@+id/howButton"
+        android:layout_below="@+id/playButton"
         android:layout_centerHorizontal="true" />
 
     <ImageView
@@ -63,6 +54,16 @@
         android:onClick="onClick"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EXIT"
+        android:id="@+id/exitButton"
+        android:onClick="onClick"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/teacherButton"
+        android:layout_alignStart="@+id/cameraButton" />
 
 </RelativeLayout>
 

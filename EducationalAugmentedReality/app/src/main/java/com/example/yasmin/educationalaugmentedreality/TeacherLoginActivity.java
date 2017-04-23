@@ -15,7 +15,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
     }
     public void onClick(View view){
 
-        if (view.getId() == R.id.next) {
+        if (view.getId() == R.id.playButton) {
         }
     }
 }

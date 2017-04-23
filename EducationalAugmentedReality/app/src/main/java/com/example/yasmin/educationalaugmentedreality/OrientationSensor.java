@@ -101,7 +101,7 @@ public class OrientationSensor extends Service {
                         //If successful, work out azimuth
                         if (SensorManager.getRotationMatrix(Rot, I, gData, mData)) {
                             mAzimuth = (int) (Math.toDegrees(SensorManager.getOrientation(Rot, orient)[0]) + 360) % 360;
-                            Log.d("Azimuth", mAzimuth + " degrees");
+                            Log.d("ANGLE", mAzimuth + " degrees");
                         }
                     }
                 }

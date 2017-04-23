@@ -5,12 +5,14 @@ import android.hardware.Camera;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,15 +45,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        populateGeofences();
     }
 
     public void onClick(View view){
 
-        if (view.getId() == R.id.next) {
-            Intent intent = new Intent(this, CrossWordActivity.class);
-            startActivity(intent);
+        if (view.getId() == R.id.playButton) {
+            if (TeacherActivity.cont) {
+                Intent intent = new Intent(this, CrossWordActivity.class);
+                startActivity(intent);
+            }
+            else{
+                Toast toast = Toast.makeText(this, "You must add objects before starting the game",
+                        Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0, 0);
+                toast.show();
+            }
         }
         else if (view.getId() == R.id.map){
             Intent intent = new Intent(this, MapsActivity.class);
@@ -65,42 +73,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, TeacherActivity.class);
             startActivity(intent);
         }
-
-    }
-
-
-    public void populateGeofences() {
-
-        //Empty list for storing geofences
-        mGeofenceNames = new ArrayList<String>();
-        mGeofenceCoordinates = new ArrayList<LatLng>();
-        mGeofenceList = new ArrayList<Geofence>();
-
-        mGeofenceNames.add("ITL");
-        //mGeofenceNames.add("Varey House/The Curve");
-        //mGeofenceNames.add("Village Shop/Beaumont Court");
-       // mGeofenceNames.add("Santander Bank");
-       // mGeofenceNames.add("Canalside");
-
-
-        mGeofenceCoordinates.add(ITL);
-        mGeofenceCoordinates.add(new LatLng(51.526143, -0.039552));
-
-
-        for (int i = 0; i < mGeofenceNames.size();i++){
-            mGeofenceList.add(new Geofence.Builder()
-                    // Set the request ID of the geofence. This is a string to identify this
-                    // geofence.
-                    .setRequestId(mGeofenceNames.get(i))
-                            //(latitude, longitude, radius_in_meters)
-                    .setCircularRegion(mGeofenceCoordinates.get(i).latitude,mGeofenceCoordinates.get(i).longitude,30)
-                            //expiration in milliseconds
-                    .setExpirationDuration(300000000)
-                    .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER)
-                    .build());
+        else if (view.getId() == R.id.exitButton){
+            android.os.Process.killProcess(android.os.Process.myPid());
         }
-        //Add geofences to GeofenceStore obect
-        mGeofenceStore = new GeofenceStore(this, mGeofenceList); //Send over context and geofence list
 
     }
 
