@@ -1,5 +1,6 @@
 package com.example.yasmin.educationalaugmentedreality;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -38,6 +39,7 @@ public class CameraActivity extends AppCompatActivity {
     int count = 0;
     boolean correct = true;
     TextView textView2;
+    TextView textView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class CameraActivity extends AppCompatActivity {
                 }
 
                 if (count == CrossWord.selectedWord.length()){
+                    /*
                     for (int i=0; i<CrossWord.selectedWord.length(); i++){
                         if (CrossWord.selectedWord.charAt(i) != textView2.getText().toString().charAt(i)){
                             correct = false;
@@ -99,8 +102,20 @@ public class CameraActivity extends AppCompatActivity {
 
                             textView2.setText(" ");
 
+                            for (int j=0; j<letters.length; j++){
+                                textView3 = (TextView) availableLetters.getChildAt(j);
+                                textView3.setText(letters[j]);
+                            }
+                            count = 0;
+                            break;
                         }
-                    }
+                        else {*/
+                            Intent intent = new Intent();
+                            setResult(Activity.RESULT_OK, intent);
+                            finish();
+
+                        //}
+                    //}
                 }
             }
         });

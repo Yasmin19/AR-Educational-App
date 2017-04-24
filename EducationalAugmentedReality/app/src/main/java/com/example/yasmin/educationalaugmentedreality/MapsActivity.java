@@ -2,6 +2,7 @@ package com.example.yasmin.educationalaugmentedreality;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -134,6 +135,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         return true;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK){
+            Intent intent = new Intent();
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+        }
     }
 
 }

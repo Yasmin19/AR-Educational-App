@@ -16,6 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="30dp" />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,6 +45,8 @@
         android:layout_marginBottom="165dp"
         android:layout_above="@+id/location"
         android:layout_centerHorizontal="true" />
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -145,5 +148,27 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="49dp" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/image"
+        android:layout_marginTop="54dp"
+        android:layout_above="@+id/location">
+        <HorizontalScrollView
+            android:id="@+id/horizontal_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+            </LinearLayout>
+
+        </HorizontalScrollView>
+    </TableRow>
+
 
 </RelativeLayout>

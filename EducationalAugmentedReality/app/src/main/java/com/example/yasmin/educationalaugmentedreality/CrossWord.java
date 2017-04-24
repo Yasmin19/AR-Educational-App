@@ -1,5 +1,7 @@
 package com.example.yasmin.educationalaugmentedreality;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -265,7 +267,6 @@ public class CrossWord {
     }
 
     public static int getPos(int row, int col){
-        Log.d("STARTARRAY", ""+Integer.parseInt(String.valueOf(row) + String.valueOf(col)));
         return Integer.parseInt(String.valueOf(row) + String.valueOf(col));
     }
 
@@ -292,15 +293,11 @@ public class CrossWord {
     public static int checkPosition(int pos){
 
         for (String word: wordPos.keySet()) {
-            Log.d("ORIEN", "" + wordOrien.get(word));
-
             if ((wordOrien.get(word)).contains("ACROSS")) {
                 if ((wordPos.get(word) <= pos) && ((wordPos.get(word) + word.length()) >= pos)) {
                     wordLength = word.length();
                     wordOrientation = "ACROSS";
                     selectedWord = word;
-                    Log.d("SELECTED WORD", ""+word);
-                    Log.d("WORDLENGTH", "WORD LENGTH: " + wordLength);
                     return wordPos.get(word);
                 }
             }
@@ -314,8 +311,6 @@ public class CrossWord {
                 int col = Character.getNumericValue(colStr);
                 for (int i = col; i <= num; i = i + 10) {
                     if (wordPos.get(word).equals(i)) {
-                        wordOrientation = "DOWN";
-                        Log.d("SELECTEDDOWN", "" + word);
                         return wordPos.get(word);
                     }
 
@@ -325,4 +320,6 @@ public class CrossWord {
 
         return 0;
     }
+
+
 }

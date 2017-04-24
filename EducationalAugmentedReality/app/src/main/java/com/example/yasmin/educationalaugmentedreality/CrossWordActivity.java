@@ -48,8 +48,6 @@ public class CrossWordActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Toast.makeText(CrossWordActivity.this, "" + position,
                         Toast.LENGTH_SHORT).show();
-                Log.d("POSITION", "" + position);
-
                 int start = CrossWord.checkPosition(position);
 
                 //Clear all previous selected boxes
@@ -62,25 +60,14 @@ public class CrossWordActivity extends AppCompatActivity {
                     }
                 }
 
-
-                Log.d("WORDLENGTH", "START: "+start);
-
                 if (CrossWord.wordOrientation.equals("ACROSS")) {
                     for (int i = start; i < start + CrossWord.wordLength; i++) {
                         TextView textView = (TextView) grid.getChildAt(i);
                         textView.setBackgroundResource(R.drawable.selected_box);
                     }
                 }
-                //For DOWN, need to add 10 with each letter
-
                 else {
-                    Log.d("SELECTED", "I'M HEREEEEE");
-                    /*
-                    for (int i = start; i<= (start + CrossWord.wordLength*10)-10; i=i+10) {
-                        TextView textView = (TextView) grid.getChildAt(i);
-                        textView.setBackgroundResource(R.drawable.selected_box);
-                    }*/
-                    for (int i = start; i < start + CrossWord.wordLength; i++) {
+                    for (int i = start; i < start + CrossWord.wordLength; i=i+10) {
                         TextView textView = (TextView) grid.getChildAt(i);
                         textView.setBackgroundResource(R.drawable.selected_box);
                     }
@@ -106,7 +93,15 @@ public class CrossWordActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK){
-            //PRINT WORD ONTO CROSSWORD
+            if ((CrossWord.wordOrien.get(CrossWord.selectedWord)).contains("ACROSS")){
+                int start = CrossWord.wordPos.get(CrossWord.selectedWord);
+                for (int i = start; i < start + CrossWord.wordLength; i++) {
+                    TextView textView = (TextView) grid.getChildAt(i);
+                    //textView.setText(" "+ CrossWord);
+
+                    textView.setText(" "+ CrossWord.getItem(i));
+                }
+            }
         }
     }
 }

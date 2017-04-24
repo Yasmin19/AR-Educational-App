@@ -2,6 +2,7 @@ package com.example.yasmin.educationalaugmentedreality;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +55,38 @@ public class TeacherActivity extends AppCompatActivity {
         desDis.setTextSize(20);
         imageDis.setTextSize(20);
         locDis.setTextSize(20);
+
+        String dino = "dinosaur";
+        LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
+
+        ImageView imageView = new ImageView(this);
+        imageView.setId(0);
+        imageView.setPadding(2, 2, 2, 2);
+        imageView.setImageBitmap(BitmapFactory.decodeResource(
+                getResources(), R.drawable.dinosaur));
+
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        layout.addView(imageView);
+
+        ImageView imageView2 = new ImageView(this);
+        imageView2.setId(0);
+        imageView2.setPadding(2, 2, 2, 2);
+        imageView2.setImageBitmap(BitmapFactory.decodeResource(
+                getResources(), R.drawable.dice));
+
+        imageView2.setScaleType(ImageView.ScaleType.FIT_XY);
+        layout.addView(imageView2);
+
+        ImageView imageView3 = new ImageView(this);
+        imageView3.setId(0);
+        imageView3.setPadding(2, 2, 2, 2);
+        imageView3.setImageBitmap(BitmapFactory.decodeResource(
+                getResources(), R.drawable.ball));
+
+        imageView3.setScaleType(ImageView.ScaleType.FIT_XY);
+        layout.addView(imageView3);
+
+
     }
 
     public void onClick(View view) {
@@ -112,7 +147,7 @@ public class TeacherActivity extends AppCompatActivity {
             startActivityForResult(intent, 1);
         }
         else if (view.getId() == R.id.doneButton){
-            if (Items.getItemsNumber() < 2) {
+           /* if (Items.getItemsNumber() < 2) {
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             }
@@ -121,7 +156,7 @@ public class TeacherActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER,0, 0);
                 toast.show();
-            }
+            }*/
         }
     }
 
