@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ public class CrossWordActivity extends AppCompatActivity {
     static Typeface font;
     private Context mContext;
     GridView grid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,9 @@ public class CrossWordActivity extends AppCompatActivity {
 
         grid = (GridView) findViewById(R.id.grid);
         grid.setAdapter(new TextAdapter(this));
+
+        Button mapB = (Button) findViewById(R.id.mapButton);
+        mapB.setBackgroundResource(R.drawable.location_marker);
 
         //Setup .ttf font file for use in crossword
         AssetManager am = this.getApplicationContext().getAssets();

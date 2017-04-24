@@ -23,7 +23,7 @@
         android:text="Object #1"
         android:id="@+id/object"
         android:layout_below="@+id/imageView"
-        android:layout_alignStart="@+id/desc" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +32,8 @@
         android:text="Description"
         android:id="@+id/desc"
         android:layout_above="@+id/descField"
-        android:layout_alignStart="@+id/addButton" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="75dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,16 +41,16 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Image"
         android:id="@+id/image"
-        android:layout_above="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="131dp" />
+        android:layout_marginBottom="165dp"
+        android:layout_above="@+id/location"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Location"
-        android:id="@+id/textView"
+        android:id="@+id/location"
         android:layout_above="@+id/latText"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="42dp" />
@@ -61,15 +62,14 @@
         android:text="Search"
         android:id="@+id/searchLoc"
         android:onClick="onClick"
-        android:layout_marginBottom="422dp"
-        android:layout_above="@+id/addButton"
-        android:layout_toEndOf="@+id/lngText"
-        android:layout_marginStart="47dp" />
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_toEndOf="@+id/lngText" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/wordField"
+        android:layout_marginBottom="45dp"
         android:layout_above="@+id/desc"
         android:layout_centerHorizontal="true" />
 
@@ -79,9 +79,9 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:id="@+id/descField"
+        android:layout_marginBottom="19dp"
         android:layout_above="@+id/image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="94dp" />
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -92,8 +92,9 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:text="                                     "
-        android:layout_alignTop="@+id/searchLoc"
-        android:layout_toStartOf="@+id/textView2" />
+        android:layout_above="@+id/addButton"
+        android:layout_toStartOf="@+id/lngText"
+        android:layout_marginBottom="181dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -131,7 +132,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Word"
-        android:id="@+id/textView3"
+        android:id="@+id/word"
         android:layout_above="@+id/wordField"
         android:layout_centerHorizontal="true" />
 

@@ -11,9 +11,13 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -31,7 +35,9 @@ public class DrawSurfaceView extends View {
     float[] history = new float[3];
     public int myAzimuth = 0;
     public boolean flag = false;
-
+    Random r;
+    char c;
+    Paint paint2;
 
     public DrawSurfaceView(Context c, Paint paint){
         super(c);
@@ -39,6 +45,11 @@ public class DrawSurfaceView extends View {
 
     public DrawSurfaceView(Context context, AttributeSet set){
         super(context, set);
+
+        paint2 = new Paint();
+        paint2.setColor(Color.BLACK);
+        paint2.setStyle(Paint.Style.FILL);
+        paint2.setTextSize(80);
 
         mDinosaur = BitmapFactory.decodeResource(context.getResources(),R.drawable.dinosaur);
 
@@ -48,17 +59,7 @@ public class DrawSurfaceView extends View {
 
         //Generate random number between 0 and 359 degrees
         Random random = new Random();
-        random.nextInt(360);
-
-
-        /***CHANGE SIZE OF IMAGE!!!!!!*******
-
-        Bitmap ball = BitmapFactory.decodeResource(getResources(), R.drawable.ball);
-        final int dstWidth = 50;
-        final int dstHeight = 50;
-        mBitmap = Bitmap.createScaledBitmap(ball, dstWidth, dstHeight, true);
-        mWood = BitmapFactory.decodeResource(getResources(), R.drawable.wood);
-        ************************************/
+        myAzimuth = random.nextInt(360);
 
     }
 
@@ -115,6 +116,9 @@ public class DrawSurfaceView extends View {
         if (Math.abs(mAzimuth-prevAz) <= 5) {
             x = (myAzimuth - (Math.round(mAzimuth/5)*5)) * 40;
         }
+        else{
+            x = (myAzimuth - prevAz) * 40;
+        }
 
         if (history[1] - OrientationSensor.linear_acceleration[1] > 2){
             //y = (history[1] - OrientationSensor.linear_acceleration[1]);
@@ -125,6 +129,7 @@ public class DrawSurfaceView extends View {
         }
 
         canvas.drawBitmap(mDinosaur, x, 0, mPaint);
+        canvas.drawText(Items.getWordDesc(CrossWord.selectedWord), x + 400, 800, paint2);
         Log.d("DRAW", "" + x);
 
 
@@ -142,8 +147,4 @@ public class DrawSurfaceView extends View {
         invalidate(); //re-draw
     }
 
-
-    public void calculateDistance(){
-
-    }
 }

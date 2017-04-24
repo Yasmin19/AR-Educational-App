@@ -21,6 +21,10 @@ public class TeacherActivity extends AppCompatActivity {
     EditText latField;
     EditText lngField;
     TextView objText;
+    TextView wordDis;
+    TextView desDis;
+    TextView imageDis;
+    TextView locDis;
     LatLng objLocation;
     public static boolean cont = false;
 
@@ -34,6 +38,16 @@ public class TeacherActivity extends AppCompatActivity {
         latField = (EditText) findViewById(R.id.latText);
         lngField = (EditText) findViewById(R.id.lngText);
         objText = (TextView) findViewById(R.id.object);
+        wordDis = (TextView) findViewById(R.id.word);
+        desDis = (TextView)findViewById(R.id.desc);
+        imageDis = (TextView) findViewById(R.id.image);
+        locDis = (TextView) findViewById(R.id.location);
+
+        objText.setTextSize(40);
+        wordDis.setTextSize(20);
+        desDis.setTextSize(20);
+        imageDis.setTextSize(20);
+        locDis.setTextSize(20);
     }
 
     public void onClick(View view) {
@@ -48,10 +62,10 @@ public class TeacherActivity extends AppCompatActivity {
                 Items.itemsList.add(i);
 
                 //Clear text fields ready for new object info input
-                wordField.setText("");
-                descField.setText("");
-                latField.setText("");
-                lngField.setText("");
+                wordField.setText("     ");
+                descField.setText("           ");
+                latField.setText("           ");
+                lngField.setText("           ");
 
                 //Get new heading to flash
                 Animation anim = new AlphaAnimation(0.0f, 1.0f);
@@ -78,8 +92,6 @@ public class TeacherActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK){
             objLocation = data.getExtras().getParcelable("location");
-            Toast.makeText(TeacherActivity.this, "" + objLocation,
-                    Toast.LENGTH_SHORT).show();
 
             latField.setText(String.valueOf(objLocation.latitude));
             lngField.setText(String.valueOf(objLocation.longitude));

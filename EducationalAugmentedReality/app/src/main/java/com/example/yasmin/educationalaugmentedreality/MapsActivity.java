@@ -40,6 +40,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Marker objMarker;
     private Context mContext;
     private LatLng objectLoc;
+    Location currentLocation;
+    Location objectLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-        //mMap.setMyLocationEnabled(true);
+        mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setCompassEnabled(true);
         mMap.setOnMarkerClickListener(this);
 
@@ -73,6 +75,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .position(objectLoc)
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.treasure)));
 
+        objectLocation = new Location("Object");
+        objectLocation.setLatitude(objectLoc.latitude);
+        objectLocation.setLongitude(objectLoc.longitude);
 
         mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
 
@@ -82,13 +87,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 loc.getLatitude();
                 loc.getLongitude();
 
+                currentLocation = loc;
+
                 //Delete marker if it already exists
                 if (mMarker != null) {
                     mMarker.remove();
                 }
                 CameraPosition cameraPosition = new CameraPosition.Builder()
                         .target(current)
-                        .zoom(20)
+                        .zoom(19)
                         .tilt(60)
                         .bearing(0)
                         .build();
@@ -98,7 +105,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         .icon(BitmapDescriptorFactory.fromResource(R.drawable.hiker)));
 
             }
-
 
             public void onStatusChanged(String s, int i, Bundle bundle) {
             }
@@ -114,18 +120,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public boolean onMarkerClick(final Marker marker) {
-        //When object marker is clicked on, start child activity of the camera view
-        if (marker.equals(objMarker))
-        {
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(objectLoc)
-                    .zoom(10)
-                    .tilt(60)
-                    .bearing(0)
-                    .build();
-            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-            Intent intent = new Intent(this, CameraActivity.class);
-            startActivityForResult(intent, 1);
+        //When object marker is clicked on,
+        // start child activity of the camera view if object within 10m
+        if (marker.equals(objMarker)) {
+           // if (currentLocation.distanceTo(objectLocation) <= 15){
+
+                Log.d("DISTANCE", "" + currentLocation.distanceTo(objectLocation));
+                Intent intent = new Intent(this, CameraActivity.class);
+                startActivityForResult(intent, 1);
+            /*}
+            else
+                return false;*/
         }
 
         return true;

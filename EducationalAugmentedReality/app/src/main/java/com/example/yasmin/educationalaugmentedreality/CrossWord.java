@@ -24,6 +24,7 @@ public class CrossWord {
     public static String wordOrientation = "DOWN";
 
 
+
     public static void populateList() {
 
 
@@ -33,14 +34,6 @@ public class CrossWord {
             Log.d("CROSSWORD", ""+ words.get(i));
         }
 
-        words.add("IGLOO");
-
-/*
-        words.add("BICYCLE");
-        words.add("DINOSAUR");
-        words.add("BALL");
-        words.add("PHONE");
-*/
     }
 
     public static void rearrange() {

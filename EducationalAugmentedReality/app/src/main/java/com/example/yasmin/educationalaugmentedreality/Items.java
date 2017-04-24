@@ -36,6 +36,7 @@ public class Items {
     public LatLng getLocation(){
         return location;
     }
+
     public static LatLng getWordLocation(String w){
 
         for (Items i: itemsList){
@@ -43,8 +44,17 @@ public class Items {
                 return i.getLocation();
             }
         }
-
         return location;
+    }
+
+    public static String getWordDesc(String w){
+        for (Items i: itemsList){
+            if (i.getWord().equals(w)){
+                return i.getDesc();
+            }
+        }
+        return "";
+
     }
 
     public int imagePath(){
@@ -56,7 +66,6 @@ public class Items {
     }
 
     public static ArrayList<String> getWordList(){
-
         for (int i=0; i<itemsList.size(); i++){
             words.add(itemsList.get(i).getWord());
             Log.d("CROSS", ""+itemsList.get(i).getWord());
