@@ -45,7 +45,7 @@ public class AvailableLetters extends BaseAdapter {
 
             textView = new TextView(mContext);
             textView.setBackgroundColor(Color.parseColor("#2a0a52"));
-            textView.setBackgroundResource(R.drawable.rounded_box);
+            textView.setBackgroundResource(R.drawable.rounded_box_select);
             textView.setPadding(5, 5, 5, 5);
             textView.setLayoutParams(new GridView.LayoutParams(116, 125));
             textView.setTextSize(43);

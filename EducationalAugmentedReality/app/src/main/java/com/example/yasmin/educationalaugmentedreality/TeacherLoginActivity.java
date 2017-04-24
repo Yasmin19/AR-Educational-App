@@ -22,12 +22,12 @@ public class TeacherLoginActivity extends AppCompatActivity {
     }
     public void onClick(View view){
 
-        if (view.getId() == R.id.playButton) {
+        if (view.getId() == R.id.loginButton) {
 
             if (username.getText().toString().equals("admin") &&
-                password.getText().toString().equals("password")){
+                password.getText().toString().equals("admin")){
 
-                Intent intent = new Intent(this, TeacherMapActivity.class);
+                Intent intent = new Intent(this, TeacherActivity.class);
                 startActivity(intent);
             }
 

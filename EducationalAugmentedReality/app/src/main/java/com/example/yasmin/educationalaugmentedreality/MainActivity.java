@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         b2.setTextSize(20);
         b3.setTextSize(20);
 
-        Intent intent = new Intent(this, CameraActivity.class);
-        startActivity(intent);
+        //Intent intent = new Intent(this, CameraActivity.class);
+        //startActivity(intent);
     }
 
     public void onClick(View view){
