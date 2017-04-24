@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         else if (view.getId() == R.id.teacherButton) {
-            Intent intent = new Intent(this, TeacherActivity.class);
+            Intent intent = new Intent(this, TeacherLoginActivity.class);
             startActivity(intent);
         }
         else if (view.getId() == R.id.exitButton){
