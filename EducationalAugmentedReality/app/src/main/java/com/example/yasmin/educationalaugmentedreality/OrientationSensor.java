@@ -19,9 +19,11 @@ import org.sensingkit.sensingkitlib.data.SKSensorData;
 
 import java.security.Provider;
 
-/**
- * Created by Yasmin on 15/03/2017.
- */
+/**********************
+ * This Class runs as a separate thread that constantly retrieves magnetometer
+ * and accelerometer data and uses the two sensor data to calculate the
+ * azimuth/bearing.
+ *********************/
 public class OrientationSensor extends Service {
 
     static int mAzimuth = 0; //degrees
@@ -101,7 +103,6 @@ public class OrientationSensor extends Service {
                         //If successful, work out azimuth
                         if (SensorManager.getRotationMatrix(Rot, I, gData, mData)) {
                             mAzimuth = (int) (Math.toDegrees(SensorManager.getOrientation(Rot, orient)[0]) + 360) % 360;
-                            Log.d("ANGLE", mAzimuth + " degrees");
                         }
                     }
                 }

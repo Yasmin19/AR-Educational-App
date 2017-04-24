@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.security.Policy;
 
 /**
- * Created by Yasmin on 01/12/2016.
+ *
  */
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;

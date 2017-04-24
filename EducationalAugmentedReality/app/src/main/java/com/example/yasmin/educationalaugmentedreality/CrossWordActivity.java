@@ -71,14 +71,20 @@ public class CrossWordActivity extends AppCompatActivity {
                         textView.setBackgroundResource(R.drawable.selected_box);
                     }
                 }
-                /*
                 //For DOWN, need to add 10 with each letter
+
                 else {
-                    for (int i = start; i< (start + CrossWord.wordLength)*10; i=i+10) {
+                    Log.d("SELECTED", "I'M HEREEEEE");
+                    /*
+                    for (int i = start; i<= (start + CrossWord.wordLength*10)-10; i=i+10) {
+                        TextView textView = (TextView) grid.getChildAt(i);
+                        textView.setBackgroundResource(R.drawable.selected_box);
+                    }*/
+                    for (int i = start; i < start + CrossWord.wordLength; i++) {
                         TextView textView = (TextView) grid.getChildAt(i);
                         textView.setBackgroundResource(R.drawable.selected_box);
                     }
-                }*/
+                }
             }
         });
     }

@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 /**
- * Created by Yasmin on 16/04/2017.
+ *
  */
 public class Items {
 

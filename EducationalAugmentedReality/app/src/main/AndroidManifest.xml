@@ -30,7 +30,6 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".GeofenceTransitionsIntentService" />
         <service android:name=".OrientationSensor" />
         <activity android:name=".CameraActivity" />
         <activity android:name=".CrossWordActivity" />

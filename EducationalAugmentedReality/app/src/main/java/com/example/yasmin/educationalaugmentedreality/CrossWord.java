@@ -21,13 +21,11 @@ public class CrossWord {
     private static boolean cont = true;
     public static int wordLength = 0;
     public static String selectedWord = "";
-    public static String wordOrientation = "DOWN";
+    public static String wordOrientation = "";
 
 
 
     public static void populateList() {
-
-
        words.addAll(Items.getWordList());
 
         for (int i=0; i<words.size(); i++){
@@ -78,10 +76,6 @@ public class CrossWord {
         int lettercount = 0;
 
 
-        /*****/
-        across = false;
-        /*****/
-
         if (across) {
             startx = 4;
             starty = (Math.round((10 - word.length())/2)) - 1;
@@ -91,6 +85,8 @@ public class CrossWord {
                 bAvailability[startx][col] = false;
                 lettercount++;
             }
+            wordPos.put(word, getPos(startx, starty));
+            wordOrien.put(word, "ACROSS");
 
         }
         else{
@@ -102,6 +98,8 @@ public class CrossWord {
                 bAvailability[row][starty] = false;
                 lettercount++;
             }
+            wordPos.put(word, getPos(startx, starty));
+            wordOrien.put(word, "DOWN");
         }
 
 
@@ -267,6 +265,7 @@ public class CrossWord {
     }
 
     public static int getPos(int row, int col){
+        Log.d("STARTARRAY", ""+Integer.parseInt(String.valueOf(row) + String.valueOf(col)));
         return Integer.parseInt(String.valueOf(row) + String.valueOf(col));
     }
 
@@ -293,7 +292,9 @@ public class CrossWord {
     public static int checkPosition(int pos){
 
         for (String word: wordPos.keySet()) {
-            if ((wordOrien.get(word)).equals("ACROSS")) {
+            Log.d("ORIEN", "" + wordOrien.get(word));
+
+            if ((wordOrien.get(word)).contains("ACROSS")) {
                 if ((wordPos.get(word) <= pos) && ((wordPos.get(word) + word.length()) >= pos)) {
                     wordLength = word.length();
                     wordOrientation = "ACROSS";
@@ -303,13 +304,21 @@ public class CrossWord {
                     return wordPos.get(word);
                 }
             }
-            else {
-                if ((wordPos.get(word) <= pos) && (wordPos.get(word) + word.length() * 10 >= pos)) {
-                    wordLength = word.length();
-                    wordOrientation = "DOWN";
-                    selectedWord = word;
-                    Log.d("SELECTEDDOWN", ""+word);
-                    return wordPos.get(word);
+           else {
+                String posStr = String.valueOf(pos);
+                if (pos < 10) {
+                    posStr = String.format("%02d", pos);
+                }
+                char colStr = posStr.charAt(1);
+                int num = Integer.valueOf("9" + colStr);
+                int col = Character.getNumericValue(colStr);
+                for (int i = col; i <= num; i = i + 10) {
+                    if (wordPos.get(word).equals(i)) {
+                        wordOrientation = "DOWN";
+                        Log.d("SELECTEDDOWN", "" + word);
+                        return wordPos.get(word);
+                    }
+
                 }
             }
         }

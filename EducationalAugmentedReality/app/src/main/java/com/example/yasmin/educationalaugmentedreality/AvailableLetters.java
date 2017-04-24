@@ -1,7 +1,7 @@
 package com.example.yasmin.educationalaugmentedreality;
 
 /**
- * Created by Yasmin on 13/04/2017.
+ *
  */
 
 import android.content.Context;
@@ -55,7 +55,8 @@ public class AvailableLetters extends BaseAdapter {
             textView = (TextView) convertView;
         }
 
-        textView.setText(" "+String.valueOf(CameraActivity.letters[position]));
+        //textView.setText(" "+String.valueOf(CameraActivity.letters[position]));
+        textView.setText(" Y");
         return textView;
     }
 
