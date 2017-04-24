@@ -55,8 +55,7 @@ public class AvailableLetters extends BaseAdapter {
             textView = (TextView) convertView;
         }
 
-        //textView.setText(" "+String.valueOf(CameraActivity.letters[position]));
-        textView.setText(" Y");
+        textView.setText(" "+String.valueOf(CameraActivity.letters[position]));
         return textView;
     }
 

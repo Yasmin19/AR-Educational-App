@@ -32,11 +32,10 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="733dp"
             android:layout_height="348dp"
             android:orientation="vertical"
-            android:layout_gravity="bottom|center_vertical"
-            android:background="@drawable/gradient_background">
+            android:layout_gravity="bottom|center_vertical">
 
            <LinearLayout
                 android:layout_weight="1"
@@ -49,7 +48,17 @@
                 android:layout_height="100dp"
                 android:layout_gravity="bottom|center_vertical"
                 android:orientation="vertical"
-                android:background ="#ffff0000">
+                android:id="@+id/select">
+
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/selectedletters"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
             </LinearLayout>
 
             <LinearLayout
@@ -64,7 +73,6 @@
                     android:id="@+id/availableletters"
                     android:numColumns="6"
                     android:layout_gravity="center_horizontal"
-                    android:background ="#ffff9000"
                     android:layout_weight="0.12"> >
                 </GridView>
             </LinearLayout>

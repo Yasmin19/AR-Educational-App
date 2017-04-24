@@ -49,12 +49,13 @@ public class TextAdapter extends BaseAdapter {
             textView.setPadding(5, 5, 5, 5);
             textView.setLayoutParams(new GridView.LayoutParams(116, 125));
             textView.setTextSize(43);
+            textView.setTextColor(Color.parseColor("#FFFFFF"));
             textView.setTypeface(CrossWordActivity.font);
         } else {
             textView = (TextView) convertView;
         }
 
-        textView.setText(" "+String.valueOf(CrossWord.getItem(position)));
+        //textView.setText(" "+String.valueOf(CrossWord.getItem(position)));
 
         if (String.valueOf(CrossWord.getItem(position)).equals(" ")){
             textView.setBackgroundResource(R.drawable.rounded_box_transparent);

@@ -42,7 +42,7 @@ public class DrawSurfaceView extends View {
         super(context, set);
 
         paint2 = new Paint();
-        paint2.setColor(Color.BLACK);
+        paint2.setColor(Color.parseColor("#8a00e6"));
         paint2.setStyle(Paint.Style.FILL);
         paint2.setTextSize(80);
 

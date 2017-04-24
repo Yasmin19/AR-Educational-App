@@ -125,7 +125,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (marker.equals(objMarker)) {
            // if (currentLocation.distanceTo(objectLocation) <= 15){
 
-                Log.d("DISTANCE", "" + currentLocation.distanceTo(objectLocation));
+                //Log.d("DISTANCE", "" + currentLocation.distanceTo(objectLocation));
                 Intent intent = new Intent(this, CameraActivity.class);
                 startActivityForResult(intent, 1);
             /*}

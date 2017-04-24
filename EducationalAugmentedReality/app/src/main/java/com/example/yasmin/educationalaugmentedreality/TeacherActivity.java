@@ -112,9 +112,16 @@ public class TeacherActivity extends AppCompatActivity {
             startActivityForResult(intent, 1);
         }
         else if (view.getId() == R.id.doneButton){
-            cont = true;
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            if (Items.getItemsNumber() < 2) {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+            else{
+                Toast toast = Toast.makeText(this, "You must add at least two objects",
+                        Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0, 0);
+                toast.show();
+            }
         }
     }
 
