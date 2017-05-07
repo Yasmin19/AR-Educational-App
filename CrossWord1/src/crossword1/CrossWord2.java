@@ -84,6 +84,7 @@ public class CrossWord2 {
         int starty = 0;
         
         int lettercount = 0;
+        /*
         if (across) {
             startx = 4;
             starty = 0;
@@ -105,6 +106,28 @@ public class CrossWord2 {
                 lettercount++;
             }
         }
+        */
+        if (across) {
+            startx = 4;
+            starty = (Math.round((10 - word.length())/2)) - 1;
+
+            for (int col=starty; col<word.length()+starty; col++){
+                board[startx][col] = word.charAt(lettercount);
+                bAvailability[startx][col] = false;
+                lettercount++;
+            }
+
+        }
+        else{
+            startx = (Math.round((10 - word.length())/2)) - 1;
+            starty = 4;
+
+            for (int row=startx; row<word.length()+startx; row++){
+                board[row][starty] = word.charAt(lettercount);
+                bAvailability[row][starty] = false;
+                lettercount++;
+            }
+        }
 
              System.out.println("-------------------");
         System.out.println("------------NEW RUN----------");
@@ -121,7 +144,7 @@ public class CrossWord2 {
             search(words.get(i));
         }*/
         
-        search("BICYCLE");
+        //search("BICYCLE");
         search("ORANGE");
         search("RABBIT");
         search("CHAIR");
@@ -133,7 +156,6 @@ public class CrossWord2 {
     public static void search(String word){
         Random random = new Random();
         boolean top = random.nextBoolean();
-        
         cont = true;
         if (top){
  //look for any intersections

@@ -29,6 +29,7 @@ public class TeacherLoginActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(this, TeacherActivity.class);
                 startActivity(intent);
+                finish();
             }
 
         }

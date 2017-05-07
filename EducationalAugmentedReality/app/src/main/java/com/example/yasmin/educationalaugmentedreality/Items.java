@@ -7,7 +7,8 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 /**
- *
+ * This class is of object Items and consists of the fields: word, desc, image, latlng coordinates
+ * and a list of items
  */
 public class Items {
 
@@ -18,10 +19,10 @@ public class Items {
     static ArrayList<Items> itemsList = new ArrayList<Items>();
     static ArrayList<String> words = new ArrayList<String>();
 
-    public Items(String w, String d, LatLng loc){
+    public Items(String w, String d, int i, LatLng loc){
         word = w;
         desc = d;
-        //image = i;
+        image = i;
         location = loc;
     }
 
@@ -32,6 +33,8 @@ public class Items {
     public String getDesc(){
         return desc;
     }
+
+    public int getImage() { return image; }
 
     public LatLng getLocation(){
         return location;
@@ -57,8 +60,14 @@ public class Items {
 
     }
 
-    public int imagePath(){
-        return image;
+    public static int getImageNo(String w){
+        for (Items i: itemsList){
+            if (i.getWord().equals(w)){
+                return i.getImage();
+            }
+        }
+
+        return 0;
     }
 
     public static ArrayList<Items> getItemList(){

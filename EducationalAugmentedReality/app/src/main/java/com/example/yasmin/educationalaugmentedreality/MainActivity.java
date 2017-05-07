@@ -47,22 +47,20 @@ public class MainActivity extends AppCompatActivity {
         b2.setTextSize(20);
         b3.setTextSize(20);
 
-        //Intent intent = new Intent(this, CameraActivity.class);
-        //startActivity(intent);
     }
 
     public void onClick(View view){
 
         if (view.getId() == R.id.playButton) {
-            if (TeacherActivity.cont) {
-                Intent intent = new Intent(this, CrossWordActivity.class);
-                startActivity(intent);
-            }
-            else{
-                Toast toast = Toast.makeText(this, "You must add objects before starting the game",
+            if (Items.getItemsNumber() < 2){
+                Toast toast = Toast.makeText(this, "You must add at least 2 objects before starting the game",
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER,0, 0);
                 toast.show();
+            }
+            else{
+                Intent intent = new Intent(this, CrossWordActivity.class);
+                startActivity(intent);
             }
         }
         else if (view.getId() == R.id.teacherButton) {

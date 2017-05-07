@@ -30,16 +30,11 @@ public class CameraActivity extends AppCompatActivity {
     public Button start;
     private Camera mCamera;
     private CameraPreview mPreview;
-    private DrawSurfaceView mDrawView;
-    GridView word;
     GridView availableLetters;
-    GridView selectedLetters;
     public static char[] letters;
     static String selectedChar = " ";
     int count = 0;
-    boolean correct = true;
-    TextView textView2;
-    TextView textView3;
+    TextView textView2;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +47,6 @@ public class CameraActivity extends AppCompatActivity {
         mPreview = new CameraPreview(this, mCamera);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
         preview.addView(mPreview);
-
-        startService(new Intent(getApplicationContext(), OrientationSensor.class));
 
         letters = new char[12];
 
@@ -93,30 +86,28 @@ public class CameraActivity extends AppCompatActivity {
                 }
 
                 if (count == CrossWord.selectedWord.length()){
-                    /*
-                    for (int i=0; i<CrossWord.selectedWord.length(); i++){
-                        if (CrossWord.selectedWord.charAt(i) != textView2.getText().toString().charAt(i)){
-                            correct = false;
-                            Vibrator v = (Vibrator) CameraActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
-                            v.vibrate(500);
+                    String entStr = textView2.getText().toString().replaceAll("\\s", "");
+                    if (!CrossWord.selectedWord.equals(entStr)){
+                        count = 0;
 
-                            textView2.setText(" ");
+                        Vibrator v = (Vibrator) CameraActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
+                        v.vibrate(500);
 
-                            for (int j=0; j<letters.length; j++){
-                                textView3 = (TextView) availableLetters.getChildAt(j);
-                                textView3.setText(letters[j]);
-                            }
-                            count = 0;
-                            break;
+                        textView2.setText(" ");
+
+                        for (int j=0; j<letters.length; j++){
+                            textView = (TextView) availableLetters.getChildAt(j);
+                            textView.setText(""+letters[j]);
                         }
-                        else {*/
-                            Intent intent = new Intent();
-                            setResult(Activity.RESULT_OK, intent);
-                            finish();
+                    }
+                    else {
+                        Intent intent = new Intent();
+                        setResult(Activity.RESULT_OK, intent);
+                        finish();
 
-                        //}
-                    //}
+                    }
                 }
+
             }
         });
     }

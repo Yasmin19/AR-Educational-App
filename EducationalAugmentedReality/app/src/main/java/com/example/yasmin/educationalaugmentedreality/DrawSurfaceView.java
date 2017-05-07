@@ -26,7 +26,7 @@ import java.util.Random;
 public class DrawSurfaceView extends View {
 
     Paint mPaint = new Paint();
-    private Bitmap mDinosaur;
+    private Bitmap mImage;
     private int screenWidth, screenHeight = 0;
     private float x = 0;
     private int prevAz = 0;
@@ -46,11 +46,22 @@ public class DrawSurfaceView extends View {
         paint2.setStyle(Paint.Style.FILL);
         paint2.setTextSize(80);
 
-        mDinosaur = BitmapFactory.decodeResource(context.getResources(),R.drawable.dinosaur);
+        int sel = Items.getImageNo(CrossWord.selectedWord);
+        if (sel == 0) {
+            mImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.dinosaur);
+        }
+        else if (sel == 1){
+            mImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.dice);
+        }
+        else {
+            mImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.ball);
+        }
 
         //Generate random number between 0 and 359 degrees
         Random random = new Random();
         myAzimuth = random.nextInt(360);
+
+        myAzimuth = 120;
 
     }
 
@@ -59,21 +70,17 @@ public class DrawSurfaceView extends View {
         //Retrieve azimuth readings from orientation sensor Service
         int mAzimuth = OrientationSensor.mAzimuth;
 
-        screenHeight = CameraActivity.getScreenHeight();
-        screenWidth = CameraActivity.getScreenWidth();
-
         //Finding difference in azimuth and scaling value
         //Get rid of any extreme/outlier values and round
-        if (Math.abs(mAzimuth-prevAz) <= 5) {
+        if (Math.abs(mAzimuth-prevAz) >= 5) {
             x = (myAzimuth - (Math.round(mAzimuth/5)*5)) * 40;
         }
         else{
             x = (myAzimuth - prevAz) * 40;
         }
 
-        canvas.drawBitmap(mDinosaur, x, 300, mPaint);
+        canvas.drawBitmap(mImage, x, 300, mPaint);
         canvas.drawText(Items.getWordDesc(CrossWord.selectedWord), x + 300, 1000, paint2);
-        Log.d("DRAW", "" + x);
 
         prevAz = mAzimuth;
 

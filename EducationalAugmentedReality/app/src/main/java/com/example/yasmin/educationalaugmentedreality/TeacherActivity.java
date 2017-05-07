@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -32,8 +33,12 @@ public class TeacherActivity extends AppCompatActivity {
     TextView desDis;
     TextView imageDis;
     TextView locDis;
+    ImageView imageView;
+    ImageView imageView2;
+    ImageView imageView3;
     LatLng objLocation;
-    public static boolean cont = false;
+    int selImage = 0;
+    boolean selected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +61,38 @@ public class TeacherActivity extends AppCompatActivity {
         imageDis.setTextSize(20);
         locDis.setTextSize(20);
 
-        String dino = "dinosaur";
+        //Creaing layout in which images are added to be selected by the user
         LinearLayout layout = (LinearLayout) findViewById(R.id.linear);
+        imageView = new ImageView(this);
+        imageView2 = new ImageView(this);
+        imageView3 = new ImageView(this);
 
-        ImageView imageView = new ImageView(this);
-        imageView.setId(0);
+        View.OnClickListener listener = new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                imageView.setBackgroundColor(Color.TRANSPARENT);
+                imageView2.setBackgroundColor(Color.TRANSPARENT);
+                imageView3.setBackgroundColor(Color.TRANSPARENT);
+
+                if (v.equals(imageView)){
+                    imageView.setBackgroundColor(Color.GRAY);
+                    selImage = 0;
+                    selected = true;
+                }
+                else if (v.equals(imageView2)){
+                    imageView2.setBackgroundColor(Color.GRAY);
+                    selImage = 1;
+                    selected = true;
+                }
+                else if (v.equals(imageView3)){
+                    imageView3.setBackgroundColor(Color.GRAY);
+                    selImage = 2;
+                    selected = true;
+                }
+            }
+        };
+
+
         imageView.setPadding(2, 2, 2, 2);
         imageView.setImageBitmap(BitmapFactory.decodeResource(
                 getResources(), R.drawable.dinosaur));
@@ -68,8 +100,6 @@ public class TeacherActivity extends AppCompatActivity {
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         layout.addView(imageView);
 
-        ImageView imageView2 = new ImageView(this);
-        imageView2.setId(0);
         imageView2.setPadding(2, 2, 2, 2);
         imageView2.setImageBitmap(BitmapFactory.decodeResource(
                 getResources(), R.drawable.dice));
@@ -77,8 +107,6 @@ public class TeacherActivity extends AppCompatActivity {
         imageView2.setScaleType(ImageView.ScaleType.FIT_XY);
         layout.addView(imageView2);
 
-        ImageView imageView3 = new ImageView(this);
-        imageView3.setId(0);
         imageView3.setPadding(2, 2, 2, 2);
         imageView3.setImageBitmap(BitmapFactory.decodeResource(
                 getResources(), R.drawable.ball));
@@ -86,9 +114,16 @@ public class TeacherActivity extends AppCompatActivity {
         imageView3.setScaleType(ImageView.ScaleType.FIT_XY);
         layout.addView(imageView3);
 
+        imageView.setOnClickListener(listener);
+        imageView2.setOnClickListener(listener);
+        imageView3.setOnClickListener(listener);
+
+
 
     }
 
+    //Button listeners for each button, different actions taken according to which
+    //button is pressed
     public void onClick(View view) {
 
         if (view.getId() == R.id.addButton) {
@@ -113,24 +148,34 @@ public class TeacherActivity extends AppCompatActivity {
                 toast.setGravity(Gravity.CENTER,0, 0);
                 toast.show();
             }
-            else if (descField.getText().toString().length() < 30){
-                Toast toast = Toast.makeText(this, "Your word description must be at least 30 " +
+            else if (descField.getText().toString().length() < 20){
+                Toast toast = Toast.makeText(this, "Your word description must be at least 20 " +
                                 "characters long",
+                        Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0, 0);
+                toast.show();
+            }
+            else if (!selected){
+                Toast toast = Toast.makeText(this, "Please select an image",
                         Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER,0, 0);
                 toast.show();
             }
             else{
                 Items i = new Items(wordField.getText().toString().toUpperCase(), descField.getText().toString(),
-                        objLocation);
+                        selImage, objLocation);
 
                 Items.itemsList.add(i);
+                Log.d("ITEMSNO", ""+Items.getItemsNumber());
 
                 //Clear text fields ready for new object info input
                 wordField.setText("");
                 descField.setText("           ");
                 latField.setText("                 ");
                 lngField.setText("                 ");
+                imageView.setBackgroundColor(Color.TRANSPARENT);
+                imageView2.setBackgroundColor(Color.TRANSPARENT);
+                imageView3.setBackgroundColor(Color.TRANSPARENT);
 
                 //Get new heading to flash
                 Animation anim = new AlphaAnimation(0.0f, 1.0f);
@@ -138,7 +183,6 @@ public class TeacherActivity extends AppCompatActivity {
                 objText.startAnimation(anim);
                 objText.setText("Object #" + (Items.getItemsNumber() + 1));
 
-                cont = true;
             }
 
         }
@@ -147,16 +191,7 @@ public class TeacherActivity extends AppCompatActivity {
             startActivityForResult(intent, 1);
         }
         else if (view.getId() == R.id.doneButton){
-           /* if (Items.getItemsNumber() < 2) {
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-            }
-            else{
-                Toast toast = Toast.makeText(this, "You must add at least two objects",
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER,0, 0);
-                toast.show();
-            }*/
+            finish();
         }
     }
 
