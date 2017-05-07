@@ -104,7 +104,6 @@ public class CameraActivity extends AppCompatActivity {
                         Intent intent = new Intent();
                         setResult(Activity.RESULT_OK, intent);
                         finish();
-
                     }
                 }
 
