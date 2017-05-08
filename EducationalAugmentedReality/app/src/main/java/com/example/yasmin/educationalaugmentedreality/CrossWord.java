@@ -267,6 +267,10 @@ public class CrossWord {
     }
 
     public static int getPos(int row, int col){
+
+        Log.d("ROW/COL", "[" + row + "][" + col + "]");
+        Log.d("ROW/COL", "string " + String.valueOf(row) + ", " + String.valueOf(col));
+
         return Integer.parseInt(String.valueOf(row) + String.valueOf(col));
     }
 
@@ -301,7 +305,7 @@ public class CrossWord {
                     return wordPos.get(word);
                 }
             }
-           else {
+            else {
                 String posStr = String.valueOf(pos);
                 if (pos < 10) {
                     posStr = String.format("%02d", pos);
@@ -309,8 +313,11 @@ public class CrossWord {
                 char colStr = posStr.charAt(1);
                 int num = Integer.valueOf("9" + colStr);
                 int col = Character.getNumericValue(colStr);
+                Log.d("COLSTART", ""+col);
                 for (int i = col; i <= num; i = i + 10) {
-                    if (wordPos.get(word).equals(i)) {
+                    Log.d("COLSTART", "loop: "+i);
+                    Log.d("COLSTART", "WORDPOS:" +wordPos.get(word));
+                    if (wordPos.get(word) == i) {
                         return wordPos.get(word);
                     }
 

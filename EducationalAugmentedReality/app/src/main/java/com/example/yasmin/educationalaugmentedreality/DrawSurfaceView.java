@@ -72,11 +72,11 @@ public class DrawSurfaceView extends View {
 
         //Finding difference in azimuth and scaling value
         //Get rid of any extreme/outlier values and round
-        if (Math.abs(mAzimuth-prevAz) >= 5) {
-            x = (myAzimuth - (Math.round(mAzimuth/5)*5)) * 40;
+        if (Math.abs(mAzimuth-prevAz) <= 5) {
+            x = (myAzimuth - (Math.round(mAzimuth/5)*5)) * 35;
         }
         else{
-            x = (myAzimuth - prevAz) * 40;
+            x = (myAzimuth - prevAz) * 35;
         }
 
         canvas.drawBitmap(mImage, x, 300, mPaint);

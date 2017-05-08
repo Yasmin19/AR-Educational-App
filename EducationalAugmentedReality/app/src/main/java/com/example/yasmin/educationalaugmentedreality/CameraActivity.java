@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class CameraActivity extends AppCompatActivity {
 
@@ -60,7 +61,15 @@ public class CameraActivity extends AppCompatActivity {
             letters[i] = c;
         }
 
-        Collections.shuffle(Arrays.asList(letters));
+        //Fisher-Yates shuffle
+        Random rnd = new  Random();
+        for (int i=letters.length-1; i>0; i--){
+            int index = rnd.nextInt(i+1);
+            //Simple swap
+            char a = letters[index];
+            letters[index] = letters[i];
+            letters[i] = a;
+        }
 
         availableLetters = (GridView) findViewById(R.id.availableletters);
         availableLetters.setAdapter(new AvailableLetters(this));

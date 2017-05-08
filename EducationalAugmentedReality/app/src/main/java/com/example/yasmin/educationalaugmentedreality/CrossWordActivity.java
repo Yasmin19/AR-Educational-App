@@ -67,7 +67,9 @@ public class CrossWordActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    for (int i = start; i < start + CrossWord.wordLength; i=i+10) {
+                    Log.d("COLSTART", "I'M HEREEEE");
+                    Log.d("COLSTART", "start: "+start);
+                    for (int i = start; i < start + CrossWord.wordLength*10; i=i+10) {
                         TextView textView = (TextView) grid.getChildAt(i);
                         textView.setBackgroundResource(R.drawable.selected_box);
                     }
